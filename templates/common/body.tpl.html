@@ -1,17 +1,16 @@
 <!-- Page Wrapper -->
-
-++++
-
 <div id="wrapper">
-
+    {if isset($smarty.session.id_user)}
     {include file="common/sidebar.tpl.html"}
-    
+    {/if}    
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
+            {if isset($smarty.session.id_user)}
             {include file="common/topbar.tpl.html"}
+            {/if}    
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 {if $page!=""}

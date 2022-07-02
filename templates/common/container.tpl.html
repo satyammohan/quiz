@@ -1,18 +1,7 @@
 {include file="common/header.tpl.html"}
 <body id="page-top">
-
-    {if isset($smarty.session.id_user) && isset($smarty.session.id_info)}
-        {$smarty_date=$ini.smarty_date scope="global"}
-        <script language="javascript" type="text/javascript">
-            var sdate = "{$smarty.session.start_date}";
-            var edate = "{$smarty.session.end_date}";
-            var js_date = "{$ini.js_date}";
-        </script>
-        {include file="common/body.tpl.html"}
-        {include file="common/addon.tpl.html"}
-    {else}
-        {include file=$page}
-    {/if}
+    {include file="common/body.tpl.html"}
+    {include file="common/addon.tpl.html"}
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.js"></script>

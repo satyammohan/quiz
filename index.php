@@ -48,11 +48,7 @@ function call_class($arr) {
     } else {
         $call->_default();
     }
-    if (!isset($arr['ce'])) {
-        $smarty->display("common/container.tpl.html");
-    } else {
-        $smarty->display("common/empty.tpl.html");
-    }
+    $smarty->display("common/container.tpl.html");
 }
 
 function get_page($params, $smarty) {
