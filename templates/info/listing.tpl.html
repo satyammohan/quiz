@@ -1,0 +1,47 @@
+nage Company / Financial Year</h2>
+<table  border="1" id="dataTable">
+    <thead>
+        <tr> 
+            <th colspan="13" align="left">
+                <select id="list_status" onchange="update_listing('info', this.value);">
+                    {html_options options=$ini.status_all selected=$smarty.request.status}
+                </select>
+            </th>
+            <th><a class="info" href="index.php?module=info&func=edit&ce=0"><div class="add_bg"></div></a></th>
+        </tr>
+        <tr>
+            <th>Name</th><th>Address1</th><th>Contact</th><th>Email</th><th>GSTIN</th><th>TIN</th><th>Pan</th><th>Tan</th>
+            <th>Member Code</th><th>Start date</th><th>End Date</th><th>Prefix</th><th>Status</th><th>Manage</th>
+        </tr>
+    </thead>
+    {foreach from=$info item=mod}
+    <tr>
+        <td>{$mod.name}</td>
+        <td>{$mod.address}</td>
+        <td>{$mod.contact}</br>{$mod.phone}</td>
+        <td>{$mod.email}</td>
+        <td>{$mod.gstdate|date_format:$smarty_date}<br>{$mod.gstin}</td>
+        <td>{$mod.tin}</td>
+        <td>{$mod.panno}</td>
+        <td>{$mod.tanno}</td>
+        <td>{$mod.membercode}</td>
+        <td>{$mod.start_date|date_format:$smarty_date}</td>
+        <td>{$mod.end_date|date_format:$smarty_date}</td>
+        <td>{$mod.prefix}</td>
+        <td><select onchange="update_status('info', '{$mod.id_info}', this.value,$('#list_status').val());">
+                {html_options options=$ini.status selected=$mod.status}
+            </select></td>
+        <td width="190px">
+            <a href="index.php?module=info&func=edit&id={$mod.id_info}"><div class="edit_bg">&nbsp;</div></a>
+            <a href="#" id="index.php?module=info&func=delete&id={$mod.id_info}&ce=0" onclick="del(this.id)"><div class="delete_bg">&nbsp;</div></a>
+            <a href="index.php?module=info&func=newyear&id={$mod.id_info}" ><b>New Year</b></a>
+        </td>
+    </tr>
+    {/foreach}
+</table>
+<script type="text/javascript">
+    $(document).ready(function() {
+        fancy_handler("info");
+        tbl_handler();
+    });
+</script>

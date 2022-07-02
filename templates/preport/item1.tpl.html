@@ -1,0 +1,36 @@
+<table border="1" id="report">
+    <thead>
+    <tr>
+       	<th>Sl.</th><th>Product Name</th><th>Invno</th><th>Date</th><th align="right">Qty</th><th align="right">Free</th><th align="right">Rate</th><th align="right">Total GST</th><th align="right">Cess</th><th align="right">Total</th>
+    </tr>
+    </thead>
+    {$qty=0}{$free=0}{$amt=0}{$cess=0}{$gst=0}
+    {section name=x loop=$data}
+        <tr>
+            <td>{$smarty.section.x.index_next}</td>
+            <td>{$data[x].name}</td>
+            <td>{$data[x].invno}</td>
+            <td>{$data[x].date|date_format:"%d-%m-%Y"}</td>
+            <td align="right">{$data[x].qty|string_format:"%.0f"}</td>
+            <td align="right">{if $data[x].free>0}{$data[x].free|string_format:"%.0f"}{/if}</td>
+            <td align="right">{$data[x].rate|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].tax_amount|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].cessamt|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].net_amount|string_format:"%.2f"}</td>
+        </tr>
+        {$qty = $qty + $data[x].qty}
+        {$free = $free + $data[x].free}
+        {$amt = $amt + $data[x].net_amount}
+        {$cess = $cess + $data[x].cessamt}
+        {$gst = $gst + $data[x].tax_amount}
+    {/section}
+    <tr>
+        <th colspan="4">Total</th>
+       	<th align="right">{$qty|string_format:"%.0f"}</th>
+        <th align="right">{$free|string_format:"%.0f"}</th>
+        <th align="right">&nbsp;</th>
+       	<th align="right">{$gst|string_format:"%.2f"}</th>
+       	<th align="right">{$cess|string_format:"%.2f"}</th>
+       	<th align="right">{$amt|string_format:"%.2f"}</th>
+    </tr>
+</table>

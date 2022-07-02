@@ -1,0 +1,28 @@
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    {include file="common/sidebar.tpl.html"}
+    
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+            {include file="common/topbar.tpl.html"}
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                {if $page!=""}
+                    {include file=$page}
+                {else}
+                    {include file="common/table.tpl.html"}
+                {/if}
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- End of Main Content -->
+        {include file="common/footer.tpl.html"}
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->

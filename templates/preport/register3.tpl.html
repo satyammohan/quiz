@@ -1,0 +1,48 @@
+<table border="1" id="report">
+    <tr>
+        <th>Sl.</th><th>Month</th><th>Year</th><th>No of Bills</th><th align="right">Taxable Amount</th>
+        <th align="right">IGST</th><th align="right">CGST</th><th align="right">SGST</th><th align="right">Total GST</th>
+       	<th align="right">Cess</th><th align="right">TCS</th><th align="right">Other</th><th align="right">Total</th>
+    </tr>
+    {$igst=0} {$cgst=0} {$sgst=0} {$tcess=0} {$total=0} {$taxable=0} {$other=0} {$gst=0} {$tcs=0}
+    {section name=x loop=$data}
+        <tr>
+            <td>{$smarty.section.x.index_next}</td>
+            <td>{$data[x].month}</td>
+            <td>{$data[x].year}</td>
+            <td align="right">{$data[x].billn}</td>
+            <td align="right">{$data[x].totalamt|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].igst|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].cgst|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].sgst|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].vat|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].totalcess|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].tcs|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].other|string_format:"%.2f"}</td>
+            <td align="right">{$data[x].total|string_format:"%.2f"}</td>
+            {$taxable = $taxable + $data[x].totalamt}
+            {$gst = $gst + $data[x].vat}
+            {$igst = $igst + $data[x].igst}
+            {$cgst = $cgst + $data[x].cgst}
+            {$sgst = $sgst + $data[x].sgst}
+            {$other = $other + $data[x].other}
+            {$vattot = $vattot + $data[x].vat}
+            {$tcess = $tcess + $data[x].totalcess}
+            {$tcs = $tcs + $data[x].tcs}
+            {$total = $total + $data[x].total}
+        </tr>
+    {/section}
+    <tr>
+        <th colspan="4">Total</th>
+        <th align="right">{$taxable|string_format:"%.2f"}</th>
+        <th align="right">{$igst|string_format:"%.2f"}</th>
+        <th align="right">{$cgst|string_format:"%.2f"}</th>
+        <th align="right">{$sgst|string_format:"%.2f"}</th>
+        <th align="right">{$gst|string_format:"%.2f"}</th>
+        <th align="right">{$tcess|string_format:"%.2f"}</th>
+        <th align="right">{$tcs|string_format:"%.2f"}</th>
+        <th align="right">{$other|string_format:"%.2f"}</th>
+        <th align="right">{$total|string_format:"%.2f"}</th>
+    </tr>
+</table>
+

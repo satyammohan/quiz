@@ -1,0 +1,161 @@
+<style>
+textarea {
+  width: 500px !important;
+  height: 100px !important;
+}
+input[type=text] {
+    width: 350px !important;
+}
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".dtpick1").datepicker({
+            dateFormat: js_date,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-15:+5',
+            onClose: function (selectedDate, e) {
+                dt = new Date((e.selectedYear + 1), e.selectedMonth, 0);
+                selectedDate1 = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+                $(".dtpick2").val(selectedDate1);
+                $(".dtpick2").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $(".dtpick2").datepicker({
+            dateFormat: js_date,
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '-15:+5',
+            onSelect: function (selectedDate) {
+                $(".dtpick1").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+    });
+</script>
+<form name="info" method="post" action="index.php?module=info&func={if $data.id_info}update{else}insert{/if}">
+    <fieldset>
+        <legend>{if $data.id_info}Edit{else}Add{/if} Information</legend>
+        <table border="0" cellspacing="2" cellpadding="2">
+            <tr>
+                <td><b>Name:</b></td>
+                <td><input type="text" name="info[name]" id="name" value="{$data.name}" size="35"/>
+                    <label for="name"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Prefix:</b></td>
+                <td><input type="text" name="info[prefix]" id="regdno" value="{$data.prefix}"/>
+                    <label for="prefix"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Address:</b></td>
+                <td colspan="3"><textarea name="info[address]" rows="10" cols="60" >{$data.address}</textarea></td>
+            </tr>
+            <tr>
+                <td><b>Contact Person:</b></td>
+                <td><input type="text" name="info[contact]" id="city" value="{$data.contact}"/>
+                    <label for="contact"></label>
+                </td>
+                <td><b>City:</b></td>
+                <td><input type="text" name="info[city]" id="city" value="{$data.city}"/>
+                    <label for="city"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>State:</b></td>
+                <td><input type="text" name="info[state]" id="email" value="{$data.state}"/>
+                    <label for="state"></label>
+                </td>
+                <td><b>Country:</b></td>
+                <td><input type="text" name="info[country]" id="email" value="{$data.country}"/>
+                    <label for="country"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Pin Code:</b></td>
+                <td><input type="text" name="info[pincode]" id="email" value="{$data.pincode}"/></td>
+                <td><b>State Code:</b></td>
+                <td><input type="text" name="info[statecode]" id="email" value="{$data.statecode}"/></td>
+            </tr>
+            <tr>
+                <td><b>Phone:</b></td>
+                <td><input type="text" name="info[phone]" id="email" value="{$data.phone}"/>
+                    <label for="phone"></label>
+                </td>
+                <td><b>Email:</b></td>
+                <td><input type="text" name="info[email]" id="email" value="{$data.email}"/>
+                    <label for="email"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>GSTIN:</b></td>
+                <td><input type="text" name="info[gstin]" id="gstin" value="{$data.gstin}"/>
+                    <label for="gstin"></label>
+                </td>
+                <td><b>GST Date:</b></td>
+                <td><input type="text" name="info[gstdate]" class="dtpickno" id="gstdate" value="{$data.gstdate|date_format:$ini.smarty_date}"/>
+                    <label for="gstdate"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Adhar Card:</b></td>
+                <td><input type="text" name="info[adhar]" id="panno" value="{$data.adhar}"/>
+                    <label for="adhar"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>LST Details:</b></td>
+                <td><input type="text" name="info[lst]" id="panno" value="{$data.lst}"/>
+                    <label for="lst"></label>
+                </td>
+                <td><b>CST Details:</b></td>
+                <td><input type="text" name="info[cst]" id="panno" value="{$data.cst}"/>
+                    <label for="cst"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Tin Details:</b></td>
+                <td><input type="text" name="info[tin]" id="panno" value="{$data.tin}"/>
+                    <label for="tin"></label>
+                </td>
+                <td><b>Member Code:</b></td>
+                <td><input type="text" name="info[membercode]" id="membercode" value="{$data.membercode}"/>
+                    <label for="member_code"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Drug Licence #:</b></td>
+                <td><input type="text" name="info[dlicence]" value="{$data.dlicence}"/>
+                    <label for="dlicence"></label></td>
+                <td><b>Food Licence #:</b></td>
+                <td><input type="text" name="info[flicence]" value="{$data.flicence}"/>
+                    <label for="flicence"></label></td>
+            </tr>
+            <tr>
+                <td><b>Pan No:</b></td>
+                <td><input type="text" name="info[panno]" id="panno" value="{$data.panno}"/>
+                    <label for="panno"></label>
+                </td>
+                <td><b>Tan No:</b></td>
+                <td><input type="text" name="info[tanno]" id="tanno" value="{$data.tanno}"/>
+                    <label for="tanno"></label>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Start Date:</b></td>
+                <td><input type="text" name="info[start_date]" class="dtpickno" value="{$data.start_date|date_format:$ini.smarty_date}"/></td>
+                <td><b>End Date:</b></td>
+                <td><input type="text" name="info[end_date]" class="dtpickno" value="{$data.end_date|date_format:$ini.smarty_date}"/></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="4">
+                    <input type="hidden" id="hide" name="id" value="{$data.id_info}">
+                    <input type="submit" id="submit" value="Submit" />
+                    <input type="reset" name="res" value="Reset"/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form> 
+

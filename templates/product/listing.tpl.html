@@ -1,0 +1,22 @@
+<h3>
+    Product Master<hr>
+</h3>
+<table id="dataTable"  class="table table-striped table-bordered" width="100%">
+    <thead>
+        <tr><th>Sl</th><th>Company</th><th>Name</th><th>HSN Code</th><th>MRP</th><th>GST %</th><th>Cess %</th></th></tr>
+    </thead>
+    <tbody>
+        {$sl=1}
+        {foreach from=$list item=mod}
+        <tr>
+            <td>{$sl++}</td>
+            <td>{$mod.cname}</td>
+            <td>{$mod.name}</td>
+            <td>{$mod.hsncode}</td>
+            <td>{$mod.mrp}</td>
+            <td>{$mod.tname}</td>
+            <td>{$mod.cess}%</td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>

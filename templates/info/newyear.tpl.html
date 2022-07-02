@@ -1,0 +1,41 @@
+<form name="info" id="add_newyr" method="post" action="index.php?module=info&func=insertyr">
+    <fieldset>
+        <legend>Create New Year</legend>
+        <table>
+            <tr>
+                <th colspan="2"><b>{$data.name}</b></th>
+            </tr>
+            <tr>
+                <td><b>Start Date:</b></td>
+                <td><input type="text" name="info[newstart_date]" class="dtpick" value={$data.start_date|date_format:"%d/%m"}/{{$data.start_date|date_format:"%Y"}+1} /></td>
+            </tr>
+            <tr>
+                <td><b>End Date:</b></td>
+                <td><input type="text" name="info[newend_date]" class="dtpick" value={$data.end_date|date_format:"%d/%m"}/{{$data.end_date|date_format:"%Y"}+1} /></td>
+            </tr>
+            <tr>
+                <td><b>Old Prefix:</b></td>
+                <td><input type="text" value={$data.prefix} readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td><b>Prefix:</b></td>
+                <td><input type="text" name="info[newprefix]" id="nextyear" autofocus /></td>
+            </tr>
+            <tr>
+                <td><b>Copy Masters:</b></td>
+                <td><select name="info[opt]"><option>Yes</option><option>No</option></select></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Reset"/>
+                </td>
+            </tr>
+        </table>
+        <table style="display: none">
+            {foreach item=x key = k from=$data}
+            <tr><td>{$k|strtoupper}</td><td><input type="" name="info[{$k}]" value="{$data.$k}"></td></tr>
+            {/foreach}
+        </table>
+    </fieldset>
+</form>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+$(document).ready(function() {
+    {if isset($data)}
+        {foreach item = items from = $data}
+            {foreach item = cur key = k from = $items}
+                var ele = "{$k}__" + start;
+                {$cur = $cur|replace:'"':' '}
+                if ($("#" + ele))
+                    $("#" + ele).val("{$cur}");
+            {/foreach}
+            addRow('mtable');
+        {/foreach}
+        getbatch("item__1");
+    {/if}
+});
+</script>

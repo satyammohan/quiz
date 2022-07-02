@@ -1,0 +1,138 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Purchase Value Chart</h6>
+  </div>
+  <div class="card-body">
+      <div class="chart-bar" style="height:200px !important">
+          <canvas id="purcChart"></canvas>
+      </div>        
+  </div>
+  <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Sales Value Chart</h6>
+  </div>
+  <div class="card-body">
+      <div class="chart-bar" style="height:200px !important">
+          <canvas id="saleChart"></canvas>
+      </div>        
+  </div>
+  <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Purchase/Sales Qty Chart</h6>
+  </div>
+  <div class="card-body">
+      <div class="chart-bar" style="height:200px !important">
+          <canvas id="qtyChart"></canvas>
+      </div>        
+  </div>
+</div>
+
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<script>
+var data_purc_lable = new Array();
+var data_sale_lable = new Array();
+var data_purcqty_lable = new Array();
+var data_purc = new Array();
+var data_sale = new Array();
+var data_purcqty = new Array();
+var data_saleqty = new Array();
+
+{foreach from=$purc item=mod}
+  data_purc_lable.push('{$mod.month}-{$mod.year}');
+  data_purc.push({$mod.total});
+{/foreach}
+{foreach from=$sale item=mod}
+  data_sale_lable.push('{$mod.month}-{$mod.year}');
+  data_sale.push({$mod.total});
+{/foreach}
+{foreach from=$qty item=mod}
+  data_purcqty_lable.push('{$mod.month}-{$mod.year}');
+  data_purcqty.push({$mod.purcqty});
+  data_saleqty.push({$mod.saleqty});
+{/foreach}
+console.log(data_purcqty);
+console.log(data_saleqty);
+var ctx = document.getElementById("purcChart");
+var purcChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: data_purc_lable,
+    datasets: [{
+      label: "Purchase",
+      backgroundColor: "red",
+      data: data_purc
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': Rs.' + tooltipItem.yLabel;
+        }
+      }
+    },
+  }
+});
+
+var ctx = document.getElementById("saleChart");
+var purcChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: data_sale_lable,
+    datasets: [{
+      label: "Purchase",
+      backgroundColor: "green",
+      data: data_sale
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0
+        }
+      }],
+    },
+    legend: {
+      display: false
+    }
+  }
+});
+
+var ctx = document.getElementById("qtyChart");
+var data = {
+    labels: data_purcqty_lable,
+    datasets: [
+        {
+            label: "Purchase",
+            backgroundColor: "red",
+            data: data_purcqty
+        },
+        {
+            label: "Sales",
+            backgroundColor: "green",
+            data: data_saleqty
+        }
+    ]
+
+};
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      maintainAspectRatio: false
+    }
+});
+</script>
