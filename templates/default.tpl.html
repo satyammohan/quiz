@@ -1,10 +1,11 @@
-<select name="language" onchange="dochangelanguage(this.value)">
+<div class="float-right"><select name="language" onchange="dochangelanguage(this.value)">
     {html_options options=$language selected=$smarty.session.language }
 </select>
+</div>
 <form method="post" action="index.php?module=web&func=nextquestion">
     <table border="0" cellspacing="2" cellpadding="2">
         <tr>
-            <td>{$q.0.question}</td>
+            <td>Question : <b>{$q.0.question}</b></td>
         </tr>
         <tr>
             <td><li>{$q.0.option_1}</li></td>
