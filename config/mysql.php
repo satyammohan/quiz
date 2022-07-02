@@ -23,7 +23,7 @@ class database {
         $this->password = $ini['password'];
         $this->dbName = $ini['dbName'];
         $this->conn = mysqli_connect($this->hostName, $this->userName, $this->password, $this->dbName) or die("Connection to the server failed");
-        mysql_set_charset('utf8',$connect);
+        mysql_set_charset('utf8',$this->conn);
         $sql = "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
         $this->query($sql);
     }
