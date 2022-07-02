@@ -1,1 +1,22 @@
-<H2>This is page is coming.</H2>
+<select name="language" onchange="dochangelanguage(this.value)">
+    {html_options options=$language selected=$smarty.session.language }
+</select>
+<form method="post" action="index.php?module=web&func=nextquestion">
+    <table border="0" cellspacing="2" cellpadding="2">
+        <tr>
+            <td>{$q.0.question}</td>
+        </tr>
+        <tr>
+            <td><li>{$q.0.option_1}</li></td>
+        </tr>
+        <tr>
+            <td><li>{$q.0.option_2}</li></td>
+        </tr>
+        <tr>
+            <td><li>{$q.0.option_3}</li></td>
+        </tr>
+        <tr>
+            <td><li>{$q.0.option_4}</li></td>
+        </tr>
+    </table>
+</form>

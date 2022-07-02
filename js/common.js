@@ -1,3 +1,6 @@
+function dochangelanguage(id) {
+    window.location.href = "index.php?module=web&func=setlanguage&id="+id;
+}
 $(function() {
     jQuery.browser={};
     jQuery.browser.msie=false; 
