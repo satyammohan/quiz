@@ -2,22 +2,8 @@
     {html_options options=$language selected=$smarty.session.language }
 </select>
 </div>
-<form method="post" action="index.php?module=web&func=nextquestion">
-    <table border="0" cellspacing="2" cellpadding="2">
-        <tr>
-            <td>Question : <b>{$q.0.question}</b></td>
-        </tr>
-        <tr>
-            <td><li>{$q.0.option_1}</li></td>
-        </tr>
-        <tr>
-            <td><li>{$q.0.option_2}</li></td>
-        </tr>
-        <tr>
-            <td><li>{$q.0.option_3}</li></td>
-        </tr>
-        <tr>
-            <td><li>{$q.0.option_4}</li></td>
-        </tr>
-    </table>
-</form>
+Question : <b>{$q.0.question}</b>
+<li>{$q.0.option_1}</li>
+<li>{$q.0.option_2}</li>
+<li>{$q.0.option_3}</li>
+<li>{$q.0.option_4}</li>
