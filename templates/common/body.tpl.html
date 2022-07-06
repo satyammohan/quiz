@@ -1,22 +1,24 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     {if isset($smarty.session.id_user)}
-    {include file="common/sidebar.tpl.html"}
+        {include file="common/sidebar.tpl.html"}
     {/if}    
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
-            {if isset($smarty.session.id_user)}
             {include file="common/topbar.tpl.html"}
-            {/if}    
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 {if $page!=""}
-                    {include file=$page}
-                {else}
-                    {include file="common/table.tpl.html"}
+                <div class="row">
+                    <div class="bg-secondary" class="col">{include file="addon/language.tpl.html"}</div>
+                    <div class="col">{include file=$page}</div>
+                    <div class="bg-primary" class="col">{include file="addon/ads.tpl.html"}</div>
+                </div>
+
+
                 {/if}
             </div>
             <!-- /.container-fluid -->

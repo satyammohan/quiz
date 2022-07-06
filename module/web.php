@@ -21,7 +21,7 @@ class web extends common {
     }
     function setlanguage() {
         $_SESSION['language'] = $_REQUEST['id'];
-        $this->redirect("index.php?module=web&func=dashboard");
+        $this->redirect("index.php");
     }
     function getnextquestion() {
 
