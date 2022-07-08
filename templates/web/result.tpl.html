@@ -13,7 +13,6 @@
             <td>{$mod.question}</td>
             {$v = "option_`$mod.answer`"}
             <td>{$mod.$v}</td>
-            <td>{$mod.answer}</td>
             <td>{if $mod.answer==$mod.correct}Correct{else}Wrong{/if}</td>
             <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
         </tr>
