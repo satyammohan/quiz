@@ -1,0 +1,20 @@
+<div>
+    <form method="post" action="?module=web&func=next">
+    <b>{$q.0.question}</b>
+    <br>
+    <input type="hidden" name="id" value="{$q.0.id}">
+    <button type="submit" name="ans" value="1"><div>{$q.0.option_1}</div></button>
+    <br>
+    <button type="submit" name="ans" value="2"><div>{$q.0.option_2}</div></button>
+    <br>
+    <button type="submit" name="ans" value="3"><div>{$q.0.option_3}</div></button>
+    <br>
+    <button type="submit" name="ans" value="4"><div>{$q.0.option_4}</div></button>
+    </form>
+</div>
+
+<div>
+    {if $prev}
+    ++++++++++
+    {/if}
+</div>

@@ -36,11 +36,17 @@ function call_class($arr) {
     global $smarty;
     if (!isset($arr['module'])) {
         $mod = "web";
-        $func = "dashboard";
+        if (isset($arr['page'])) {
+            $func = strtolower($arr['page']);
+        } else {
+            $func = "dashboard";
+        }
     } else {
         $mod = $arr['module'];
         $func = $arr['func'];
     }
+    $_REQUEST['module'] = $mod;
+    $_REQUEST['func'] = $func;
     include_once ("module/$mod.php");
     $call = new $mod();
     if (method_exists($call, $func)) {

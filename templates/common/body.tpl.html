@@ -11,15 +11,15 @@
             {include file="common/topbar.tpl.html"}
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                {if $page!=""}
                 <div class="row">
-                    <div class="bg-secondary" class="col">{include file="addon/language.tpl.html"}</div>
+                    <div class="sidebars">{include file="addon/language.tpl.html"}</div>
+                    {if $page!=""}
                     <div class="col">{include file=$page}</div>
-                    <div class="bg-primary" class="col">{include file="addon/ads.tpl.html"}</div>
+                    {else}
+                    This page is coming up.
+                    {/if}
+                    <div class="sidebars">{include file="addon/ads.tpl.html"}</div>
                 </div>
-
-
-                {/if}
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -30,3 +30,15 @@
 
 </div>
 <!-- End of Page Wrapper -->
+
+<style>
+    html, body {
+        margin: 0px;
+        padding: 0px;
+    }
+    .sidebars {
+        height: 600px;
+        background-color: #D3D3D3;
+        width: 15%;
+    }
+</style>
