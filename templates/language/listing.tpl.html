@@ -1,0 +1,22 @@
+<h3>Language Master<hr></h3>
+<table id="dataTable" class="table table-striped table-bordered" width="100%">
+    <thead>    
+        <tr>
+            <th>english_name</th>
+            <th>regional_name</th>
+            <th>Date Created</th>
+            <th>&nbsp;<a title="Add Language" href="index.php?module=language&func=edit"><i class="fa fa-plus fa-2x"></i></a></th>
+        </tr>
+    </thead>
+    {foreach from=$language item=mod}
+    <tr>
+        <td>{$mod.english_name}</td>
+        <td>{$mod.regional_name}</td>
+        <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
+        <td>
+            <a title="Edit Language" href="index.php?module=language&func=edit&id={$mod.id}"><i class="fa fa-edit fa-2x"></i></a>
+            <a title="Delete Language" href="index.php?module=language&func=delete&id={$mod.id}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
+        </td>
+    </tr>
+    {/foreach}
+</table>

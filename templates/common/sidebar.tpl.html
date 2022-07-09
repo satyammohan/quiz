@@ -1,12 +1,11 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-+++++++++
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i><img height="30" src="config/odiray.jpg"></i>
+            Home
         </div>
-        <div class="sidebar-brand-text mx-3">ODIRAY</div>
+        <div class="sidebar-brand-text mx-3">QuizStation</div>
     </a>
 
     <!-- Divider -->
@@ -22,111 +21,27 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Management
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="index.php?module=category&func=listing" aria-expanded="true">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Master</span>
+            <span>Category</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=party&func=listing">Account Head</a>
-                <a class="collapse-item" href="index.php?module=product&func=listing">Item</a>
-                <!-- <a class="collapse-item" href="index.php?module=series&func=listing">Sales Prefix</a> -->
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Entry</span>
+        <a class="nav-link" href="index.php?module=language&func=listing" aria-expanded="true">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Language</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=sales&func=listing">Sales</a>
-                <a class="collapse-item" href="index.php?module=partner&func=createOrder">Purchase Order</a>
-                <a class="collapse-item" href="index.php?module=accounts&func=listing">Accounts</a>
-            </div>
-        </div>
+        <a class="nav-link" href="index.php?module=question&func=listing" aria-expanded="true">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Question</span>
+        </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Reports
-    </div>
-
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#SalesReport"
-            aria-expanded="true" aria-controls="SalesReport">
+        <a class="nav-link" href="index.php?module=report&func=search" aria-expanded="true">
             <i class="fas fa-list"></i>
-            <span>Sales</span>
+            <span>Search</span>
         </a>
-        <div id="SalesReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=sreport&func=register">Register</a>
-                <a class="collapse-item" href="index.php?module=sreport&func=GST">GST</a>
-                <a class="collapse-item" href="index.php?module=sreport&func=hsn">HSN Report</a>
-                <a class="collapse-item" href="index.php?module=sreport&func=item">Item</a>
-            </div>
-        </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#PurcReport" aria-expanded="true"
-            aria-controls="PurcReport">
-            <i class="fas fa-list"></i>
-            <span>Purchase</span>
-        </a>
-        <div id="PurcReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=preport&func=register">Register</a>
-                <a class="collapse-item" href="index.php?module=preport&func=item">Item</a>
-                <hr class="sidebar-divider d-none d-md-block">
-                <a class="collapse-item" href="index.php?module=partner&func=myOrders&approve=0">Purchase Order</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#StockReport"
-            aria-expanded="true" aria-controls="StockReport">
-            <i class="fas fa-list"></i>
-            <span>Stock</span>
-        </a>
-        <div id="StockReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=stock&func=statement">Stock Statement</a>
-                <a class="collapse-item" href="index.php?module=stock&func=register">Stock Register</a>
-            </div>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#AccountsReport"
-            aria-expanded="true" aria-controls="AccountsReport">
-            <i class="fas fa-list"></i>
-            <span>Accounts</span>
-        </a>
-        <div id="AccountsReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="index.php?module=partner&func=ledger">My Ledger</a>
-                <a class="collapse-item" href="index.php?module=accounts&func=pledger">Party Ledger</a>
-                <a class="collapse-item" href="index.php?module=accounts&func=outstanding">Outstanding</a>
-            </div>
-        </div>
-    </li>
-    <!-- Divider -->
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt text-gray-400"></i>

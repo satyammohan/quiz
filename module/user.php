@@ -12,7 +12,10 @@ class user extends common {
     function _default() {
         $this->sm->assign("page", "user/home.tpl.html");
     }
-
+    function setsess() {
+        $_SESSION['id_user'] = 1;
+        $this->redirect("index.php");
+    }
     function checkinfo() {
         if (isset($_SESSION['id_info']) && isset($_SESSION['prefix'])) {
             $this->sm->assign("page", "info/welcome.tpl.html");

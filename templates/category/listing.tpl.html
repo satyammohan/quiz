@@ -1,0 +1,22 @@
+<h3>Category Master<hr></h3>
+<table id="dataTable" class="table table-striped table-bordered" width="100%">
+    <thead>    
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date Created</th>
+            <th>&nbsp;<a title="Add Category" href="index.php?module=category&func=edit"><i class="fa fa-plus fa-2x"></i></a></th>
+        </tr>
+    </thead>
+    {foreach from=$category item=mod}
+    <tr>
+        <td><a href="index.php?module=subcategory&func=listing&id_category={$mod.id_category}">{$mod.name}</a></td>
+        <td>{$mod.description}</td>
+        <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
+        <td>
+            <a title="Edit Category" href="index.php?module=category&func=edit&id={$mod.id_category}"><i class="fa fa-edit fa-2x"></i></a>
+            <a title="Delete Category" href="index.php?module=category&func=delete&id={$mod.id_category}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
+        </td>
+    </tr>
+    {/foreach}
+</table>
