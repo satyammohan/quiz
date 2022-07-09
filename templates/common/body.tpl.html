@@ -12,13 +12,17 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="sidebars">{include file="addon/language.tpl.html"}</div>
+                    {if !$smarty.session.is_admin}
+                        <div class="sidebars">{include file="addon/language.tpl.html"}</div>
+                    {/if}
                     {if $page!=""}
                     <div class="col">{include file=$page}</div>
                     {else}
                     This page is coming up.
                     {/if}
-                    <div class="sidebars">{include file="addon/ads.tpl.html"}</div>
+                    {if !$smarty.session.is_admin}
+                        <div class="sidebars">{include file="addon/ads.tpl.html"}</div>
+                    {/if}
                 </div>
             </div>
             <!-- /.container-fluid -->

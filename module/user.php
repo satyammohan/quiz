@@ -14,6 +14,7 @@ class user extends common {
     }
     function setsess() {
         $_SESSION['id_user'] = 1;
+        $_SESSION['is_admin'] = 1;
         $this->redirect("index.php");
     }
     function checkinfo() {
