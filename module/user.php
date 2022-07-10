@@ -12,6 +12,9 @@ class user extends common {
     function _default() {
         $this->sm->assign("page", "user/home.tpl.html");
     }
+    function login() {
+
+    }
     function setsess() {
         $_SESSION['id_user'] = 1;
         $_SESSION['is_admin'] = 1;
@@ -27,50 +30,18 @@ class user extends common {
             $this->sm->assign("page", "user/activate.tpl.html");
         }
     }
-    function login() {
-        $this->selectcompany();
-        $sql = "SELECT id_head AS id_user, partyuser AS user, name, email AS pemail, 0 AS is_admin, address1 AS paddress, address2 AS paddress1, phone AS pphone, 'party' AS type
-                FROM {$this->prefix}head WHERE partyuser='".$_REQUEST['user']['uname']."' AND partyuser!='' AND partypass='".$_REQUEST['user']['pass']."'";
+    function setlogin() {
+        $sql = "SELECT * FROM user WHERE user='".$_REQUEST['user']['uname']."' AND pass=md5('".$_REQUEST['user']['pass']."')";
         $user = $this->m->fetch_assoc($sql);
         if ($user) {
             $this->set_session($user);
-            $_SESSION['type'] = "party";
-            $this->set_permission();
-            $this->config();
-            $this->savelogininfo($_SESSION['type'], $_SERVER['REMOTE_ADDR'], $user['id_user'], "Login");
-            $_SESSION['msg'] = "Successfully Logged as Partner.";
+            $_SESSION['msg'] = "Successfully Logged in.";
+            $this->redirect("index.php");
         } else {
             $_SESSION['msg'] = "Invalid Username or Password.";
+            $this->redirect("index.php?module=user&func=login");
         }
-        $this->redirect("index.php");
     }    
-    function savelogininfo($type, $ip, $id_user, $logintype) {
-        $sql = "INSERT INTO login_details (type, ip, id_user, logintype, date) values ('$type', '$ip', '$id_user', '$logintype', NOW())";
-        $this->m->query($sql);
-    }
-    function selectcompany() {
-        $sql = "SELECT value FROM configuration WHERE name='PARTNERLOGIN' LIMIT 1";
-        $con = $this->m->fetch_assoc($sql);
-        $pre = @$con['value'];
-        if ($pre) {
-            $sql = "SELECT * FROM info WHERE prefix='{$pre}' LIMIT 1";
-            $info = $this->m->fetch_assoc($sql);
-            foreach ($info as $k =>$v) {
-                $_SESSION[$k] = $v;
-            }
-            $this->table_prefix();
-        }
-    }
-    function checklogindate($id) {
-        $sql = "SELECT password_date AS date FROM user WHERE id_user='$id'";
-        $d = $this->m->fetch_assoc($sql);
-        $md = date('Y-m-d');
-        $md = date('Y-m-d', strtotime($md. ' - 45 days'));
-        if ($md > $d['date']) {
-            $_SESSION['msg'] = "Password should be changed in every 45 days.";
-            $this->redirect("index.php?module=user&func=changepass");
-        }
-    }
     function changepass() {
         $this->sm->assign("page", "user/changepass.tpl.html");
     }
@@ -87,18 +58,6 @@ class user extends common {
         $this->m->query($sql);
         $this->redirect("index.php?module=user&func=logout");
     }
-    function config() {
-        $sql = "SELECT * FROM `configuration`";
-        $data = array();
-        $rs = $this->m->query($sql);
-        while ($row = $this->m->movenexta($rs)) {
-            $name = strtoupper($row['name']);
-            $value = strtoupper($row['value']);
-            $data[$name] = $value;
-        }
-        $_SESSION['config'] = $data;
-    }
-
     function submit_register() {
         $st = md5(rand());
         $sql = $this->create_insert("user", array("id_user" => " ", "user" => $this->data['uname'], "pass" => md5($this->data['cpass']), "name" => $this->data['name'], "email" => $this->data['email'], "status" => $st, "login_status" => '0'));

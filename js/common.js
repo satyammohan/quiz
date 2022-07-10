@@ -1,7 +1,11 @@
 function dochangelanguage(id) {
     window.location.href = "index.php?module=web&func=setlanguage&id="+id;
 }
+function clear_msg() {
+    $('.err_msg').hide('slow');
+}
 $(function() {
+    setTimeout(clear_msg, 10000);
     jQuery.browser={};
     jQuery.browser.msie=false; 
     jQuery.browser.version=0;

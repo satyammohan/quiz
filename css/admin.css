@@ -11329,3 +11329,8 @@ input[readonly] {
 .dataTables_paginate {
   float: right;
 }
+.err_msg {
+  background-color:#FF0000;
+  font-size:20px;
+  text-align:center;
+}

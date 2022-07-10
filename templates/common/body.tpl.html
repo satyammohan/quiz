@@ -18,9 +18,12 @@
                         </div>
                     {/if}
                     {if $page!=""}
-                    <div class="col">{include file=$page}</div>
+                        <div class="col">
+                            <div class="err_msg"><b>{$smarty.session.msg}</b></div>
+                            {include file=$page}
+                        </div>
                     {else}
-                    This page is coming up.
+                        This page is coming up.
                     {/if}
                     {if !$smarty.session.is_admin}
                         <div class="sidebars">
