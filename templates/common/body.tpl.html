@@ -13,7 +13,9 @@
             <div class="container-fluid">
                 <div class="row">
                     {if !$smarty.session.is_admin}
-                        <div class="sidebars">{include file="addon/language.tpl.html"}</div>
+                        <div class="sidebars">
+                            {include file="common/usersite/left_sidebar.tpl.html"}
+                        </div>
                     {/if}
                     {if $page!=""}
                     <div class="col">{include file=$page}</div>
@@ -21,7 +23,7 @@
                     This page is coming up.
                     {/if}
                     {if !$smarty.session.is_admin}
-                        <div class="sidebars">{include file="addon/ads.tpl.html"}</div>
+                        {include file="common/usersite/right_sidebar.tpl.html"}
                     {/if}
                 </div>
             </div>

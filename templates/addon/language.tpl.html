@@ -1,3 +1,0 @@
-{foreach from=$language key=k item=i}
-    <a href="index.php?module=web&func=setlanguage&id={$k}" class="{if $smarty.session.language==$k}active{/if} btn btn-success rounded-circle">{$i}</a>
-{/foreach}

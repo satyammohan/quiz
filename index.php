@@ -53,8 +53,12 @@ function call_class($arr) {
         $call->$func();
     } else {
         $call->_default();
+    }    
+    if (isset($arr['ce']) && $arr['ce'] == 1) {
+        $smarty->display("common/containerempty.tpl.html");
+    } else {
+        $smarty->display("common/container.tpl.html");
     }
-    $smarty->display("common/container.tpl.html");
 }
 
 function get_page($params, $smarty) {

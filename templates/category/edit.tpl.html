@@ -3,12 +3,20 @@
         <legend>{if $data.id_category}Edit{else}Add{/if} Category</legend>
         <table border="0" cellspacing="2" cellpadding="2">
             <tr>
-                <td><b>Name:</b></td>
+                <td><b>English Name:</b></td>
                 <td><input type="text" required name="comp[name]" class="form-control" value="{$data.name}" size="40"/></td>
             </tr>
             <tr>
-                <td><b>Description:</b></td>
-                <td><input type="text" required name="comp[description]" class="form-control" value="{$data.description}" size="40"/></td>
+                <td><b>Language:</b></td>
+                <td>
+                    <select class="form-control"  name="comp[id_language]">
+                        {html_options options=$language selected=$data.id_language}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Regional Name:</b></td>
+                <td><input type="text" required name="comp[regional_name]" class="form-control" value="{$data.regional_name}" size="40"/></td>
             </tr>
             <tr>
                 <td align="center" colspan="2">

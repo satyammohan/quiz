@@ -3,6 +3,7 @@
     <div class="item">
         <ul class="navbar-nav ml-auto">
             <a href="index.php" class="btn btn-info rounded-circle">Home</a>
+            <a href="index.php?page=Trending" class="btn btn-info rounded-circle">Trending</a>
             <a href="index.php?page=social" class="btn btn-info rounded-circle">Social Jagat</a>
             <!-- <a href="index.php?page=language" class="btn btn-info rounded-circle">Languages</a> -->
             <a href="index.php?page=marketplace" class="btn btn-info rounded-circle">Marketplace</a>
@@ -22,27 +23,7 @@
         </div>
     </div>
 </div>
-<div class="cnt">
-    <div class="item">
-        <a href="index.php?page=Trending" class="btn btn-info rounded-circle">Trending</a>
-    </div>
-    <div class="item">
-        <a href="index.php?page=Sports" class="btn btn-info rounded-circle">Languages</a>
-    </div>
-    <div class="item">
-        <a href="index.php?page=Gaming" class="btn btn-info rounded-circle">Marketplace</a>
-    </div>
-    <div class="item">
-        <a href="index.php?page=Education" class="btn btn-info rounded-circle">Education</a>
-    </div>
-    <div class="item">
-        <a href="index.php?page=Music" class="btn btn-info rounded-circle">Music</a>
-    </div>
-    <div class="item">
-        <a href="index.php?page=result" class="btn btn-info rounded-circle">My Result</a>
-    </div>
-</div>
-
+{get_page module="category" func="show"}
 <style>
 .item { 
   flex: 1; 

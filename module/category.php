@@ -1,21 +1,33 @@
 <?php
 class category extends common {
     function __construct() {
-        $this->checklogin();
+        //$this->checklogin();
         $this->table_prefix();
         parent:: __construct();
+    }
+    function setcategory() {
+        $_SESSION['category'] = $_REQUEST['id'];
+        $this->redirect("index.php");
     }
     function listing() {
         $this->get_permission("category", "REPORT");
         if (isset($_REQUEST['flag'])) {
-            $wcond = ($_REQUEST['flag'] == 2) ?  "" : " WHERE flag = " . $_REQUEST['flag'];
+            $wcond = ($_REQUEST['flag'] == 2) ?  "" : " AND c.flag = " . $_REQUEST['flag'];
         } else {
             $_REQUEST['flag'] = 2;
             $wcond = "";
         }
-        $sql = "SELECT * FROM {$this->prefix}category $wcond ORDER BY name";
+        $sql = "SELECT c.*, l.english_name AS language_name FROM {$this->prefix}category c, {$this->prefix}language l WHERE c.id_language=l.id $wcond ORDER BY c.name";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("category", $data);
+    }    
+    function show() {
+        $this->get_permission("category", "REPORT");
+        $lang = $_SESSION['language'];
+
+        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
+        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        $this->sm->assign("category", $category);
     }
     function edit() {
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "0";
@@ -23,6 +35,11 @@ class category extends common {
         $sql = $this->create_select($this->prefix . "category", "id_category='{$id}'");
         $data = $this->m->fetch_assoc($sql);
         $this->sm->assign("data", $data);
+        
+        $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
+        $res = $this->m->query($sql);
+        $l = $this->m->getall($res, 2, "english_name", "id");
+        $this->sm->assign("language", $l);
     }
     function insert() {
         $this->get_permission("category", "INSERT");

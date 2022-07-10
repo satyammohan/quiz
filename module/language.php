@@ -1,7 +1,6 @@
 <?php
 class language extends common {
     function __construct() {
-        $this->checklogin();
         $this->table_prefix();
         parent:: __construct();
     }
@@ -13,6 +12,11 @@ class language extends common {
             $_REQUEST['flag'] = 2;
             $wcond = "";
         }
+        $sql = "SELECT * FROM {$this->prefix}language $wcond ORDER BY english_name";
+        $data = $this->m->getall($this->m->query($sql));
+        $this->sm->assign("language", $data);
+    }
+    function language() {
         $sql = "SELECT * FROM {$this->prefix}language $wcond ORDER BY english_name";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("language", $data);
