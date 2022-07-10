@@ -1,5 +1,5 @@
 <div class="cnt">
-{if $category}
+{if $category1}
     {foreach from=$category key=k item=i}
         <div class="item">
             <a href="index.php?module=category&func=setcategory&id={$k}" class="{if $smarty.session.category==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
@@ -7,7 +7,8 @@
     {/foreach}
 {else}
     <div class="item">
-        <div class="btn btn-info rounded-circle">No subCategories</div>
+        <!-- <div class="btn btn-info rounded-circle">No subCategories</div> -->
+        Subcategory's show here
     </div>
 {/if}
 </div>
