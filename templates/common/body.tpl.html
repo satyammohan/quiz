@@ -23,7 +23,9 @@
                     This page is coming up.
                     {/if}
                     {if !$smarty.session.is_admin}
-                        {include file="common/usersite/right_sidebar.tpl.html"}
+                        <div class="sidebars">
+                            {include file="common/usersite/right_sidebar.tpl.html"}
+                        </div>
                     {/if}
                 </div>
             </div>
