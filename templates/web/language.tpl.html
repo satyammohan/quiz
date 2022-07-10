@@ -1,0 +1,12 @@
+<!-- {foreach from=$language key=k item=i}
+    <a href="index.php?module=web&func=setlanguage&id={$i.id}" class="{if $smarty.session.language==$i.id}active{/if} btn btn-success rounded-circle">{$i.regional_name}</a>
+{/foreach} -->
+<select class="form-control" onchange="setval(this.value);">
+    {html_options options=$language selected=$smarty.session.language}
+</select>
+<script>
+function setval(id) {
+    url = "index.php?module=web&func=setlanguage&id="+id;
+    window.location.href = url;
+}
+</script>

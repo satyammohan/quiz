@@ -5,12 +5,36 @@ class web extends common {
         $this->table_prefix();
         parent:: __construct();
         $_SESSION['language'] = isset($_SESSION['language']) ? $_SESSION['language'] : 1;
-        $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY regional_name";
-        $res = $this->m->query($sql);
-        $l = $this->m->getall($res, 2, "regional_name", "id");
-        $this->sm->assign("language", $l);
+        // $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY regional_name";
+        // $res = $this->m->query($sql);
+        // $l = $this->m->getall($res, 2, "regional_name", "id");
+        // $this->sm->assign("language", $l);
     }
     function _default() {
+    }
+    function language() {
+        $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
+        $res = $this->m->query($sql);
+        $l = $this->m->getall($res, 2, "english_name", "id");
+        $this->sm->assign("language", $l);
+    }
+    function category() {
+        $lang = $_SESSION['language'];
+        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
+        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        $this->sm->assign("category", $category);
+    }
+    function setcategory() {
+        $_SESSION['category'] = $_REQUEST['id'];
+        $this->redirect("index.php");
+    }
+    function subcategory() {
+        $this->get_permission("category", "REPORT");
+        $lang = $_SESSION['language'];
+
+        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
+        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        $this->sm->assign("category", $category);
     }
     function dashboard() {
         $_SESSION['guest'] = @$_SESSION['guest'] ? $_SESSION['guest'] : rand(1000000, 10000000);
@@ -41,8 +65,6 @@ class web extends common {
         $this->sm->assign("a", $a);
     }
     function social() {
-    }
-    function language() {
     }
     function marketplace() {
     }

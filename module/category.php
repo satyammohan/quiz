@@ -1,13 +1,9 @@
 <?php
 class category extends common {
     function __construct() {
-        //$this->checklogin();
+        $this->checklogin();
         $this->table_prefix();
         parent:: __construct();
-    }
-    function setcategory() {
-        $_SESSION['category'] = $_REQUEST['id'];
-        $this->redirect("index.php");
     }
     function listing() {
         $this->get_permission("category", "REPORT");
@@ -20,14 +16,6 @@ class category extends common {
         $sql = "SELECT c.*, l.english_name AS language_name FROM {$this->prefix}category c, {$this->prefix}language l WHERE c.id_language=l.id $wcond ORDER BY c.name";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("category", $data);
-    }    
-    function show() {
-        $this->get_permission("category", "REPORT");
-        $lang = $_SESSION['language'];
-
-        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
-        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
-        $this->sm->assign("category", $category);
     }
     function edit() {
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "0";
