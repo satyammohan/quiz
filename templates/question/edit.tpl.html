@@ -5,7 +5,7 @@
             <tr>
                 <td><b>Language:</b></td>
                 <td>
-                    <select class="form-control"  name="comp[id_language]" onchange="getcategory(this.value);">
+                    <select class="form-control" required name="comp[id_language]" onchange="getcategory(this.value);">
                         {html_options options=$language selected=$data.id_language}
                     </select>
                 </td>
@@ -14,7 +14,7 @@
             <tr>
                 <td><b>Category:</b></td>
                 <td>
-                    <select class="form-control" id="category" name="comp[category]" onchange="getsubcategory(this.value);">
+                    <select class="form-control" required id="category" name="comp[category]" onchange="getsubcategory(this.value);">
                         {html_options options=$category selected=$data.id_category}
                     </select>
                 </td>
@@ -23,7 +23,7 @@
             <tr>
                 <td><b>Sub-Category:</b></td>
                 <td>
-                    <select class="form-control" id="subcategory" name="comp[id_subcategory]">
+                    <select class="form-control" required id="subcategory" name="comp[id_subcategory]">
                         {html_options options=$subcategory selected=$data.id_subcategory}
                     </select>
                 </td>
