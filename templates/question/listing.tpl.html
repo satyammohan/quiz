@@ -35,8 +35,8 @@
         <td>{$mod.answer}</td>
         <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
         <td>
-            <a title="Edit Question" href="index.php?module=question&func=edit&id={$mod.id_question}"><i class="fa fa-edit fa-2x"></i></a>
-            <a title="Delete Question" href="index.php?module=question&func=delete&id={$mod.id_question}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
+            <a title="Edit Question" href="index.php?module=question&func=edit&id_question={$mod.id_question}"><i class="fa fa-edit fa-2x"></i></a>
+            <a title="Delete Question" href="index.php?module=question&func=delete&id_question={$mod.id_question}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
         </td>
     </tr>
     {/foreach}
