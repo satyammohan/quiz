@@ -16,7 +16,7 @@ class question extends common {
     function subcategory() {
         $cat = $_REQUEST['id_category'];
         $sql = "SELECT * FROM {$this->prefix}subcategory WHERE id_category='$cat' ORDER BY name";
-        $scategory = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        $scategory = $this->m->getall($this->m->query($sql), 2, "name", "id_subcategory");
         ob_clean();
         echo json_encode($scategory);
         exit;
