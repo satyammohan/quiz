@@ -5,7 +5,12 @@
             <th>Name</th>
             <th>Description</th>
             <th>Date Created</th>
-            <th>&nbsp;<a title="Add Sub-Category" href="index.php?module=subcategory&func=edit&id_category={$smarty.request.id_category}"><i class="fa fa-plus fa-2x"></i></a></th>
+            <th>
+                <select id="list_status" onchange="update_listing('subcategory', this.value);">
+                    {html_options options=$ini.status_all selected=$smarty.request.flag}
+                </select>
+                <a title="Add Sub-Category" href="index.php?module=subcategory&func=edit&id_category={$smarty.request.id_category}"><i class="fa fa-plus fa-2x"></i></a>
+            </th>
         </tr>
     </thead>
     {foreach from=$subcategory item=mod}
@@ -14,6 +19,9 @@
         <td>{$mod.description}</td>
         <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
         <td>
+            <select onchange="update_status('subcategory', '{$mod.id_subcategory}', this.value, $('#list_status').val());">
+                {html_options options=$ini.status selected=$mod.flag}
+            </select>
             <a title="Edit Sub-Category" href="index.php?module=subcategory&func=edit&id={$mod.id_subcategory}&id_category={$smarty.request.id_category}"><i class="fa fa-edit fa-2x"></i></a>
             <a title="Delete Sub-Category" href="index.php?module=subcategory&func=delete&id={$mod.id_subcategory}&id_category={$smarty.request.id_category}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
         </td>

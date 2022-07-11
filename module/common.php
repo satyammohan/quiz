@@ -118,7 +118,7 @@ class common {
         } else {
             $tbl = $this->prefix . $_REQUEST['table'];
         }
-        $sql = "UPDATE `{$tbl}` SET status='{$_REQUEST['row_status']}' WHERE `id_{$_REQUEST['table']}`='{$_REQUEST['id']}'";
+        $sql = "UPDATE `{$tbl}` SET flag='{$_REQUEST['row_status']}' WHERE `id_{$_REQUEST['table']}`='{$_REQUEST['id']}'";
         $this->m->query($sql);
         if ($_REQUEST['list_status'] != 2) {
             $status = $_REQUEST['list_status'];
@@ -128,7 +128,7 @@ class common {
         if (isset($_REQUEST['ce'])) {
             $this->redirect($_SERVER['HTTP_REFERER']);
         } else {
-            $this->redirect("index.php?module={$_REQUEST['table']}&func=listing&status=$status");
+            $this->redirect("index.php?module={$_REQUEST['table']}&func=listing&flag=$status");
         }
     }
 

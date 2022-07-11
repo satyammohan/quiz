@@ -6,7 +6,12 @@
             <th>Language</th>
             <th>Regional Name</th>
             <th>Date Created</th>
-            <th>&nbsp;<a title="Add Category" href="index.php?module=category&func=edit"><i class="fa fa-plus fa-2x"></i></a></th>
+            <th>
+                <select id="list_status" onchange="update_listing('category', this.value);">
+                    {html_options options=$ini.status_all selected=$smarty.request.flag}
+                </select>
+                <a title="Add Category" href="index.php?module=category&func=edit"><i class="fa fa-plus fa-2x"></i></a>
+            </th>
         </tr>
     </thead>
     {foreach from=$category item=mod}
@@ -16,6 +21,9 @@
         <td>{$mod.regional_name}</td>
         <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>
         <td>
+            <select onchange="update_status('category', '{$mod.id_category}', this.value, $('#list_status').val());">
+                {html_options options=$ini.status selected=$mod.flag}
+            </select>
             <a title="Edit Category" href="index.php?module=category&func=edit&id={$mod.id_category}"><i class="fa fa-edit fa-2x"></i></a>
             <a title="Delete Category" href="index.php?module=category&func=delete&id={$mod.id_category}" onclick="return confirm('Do you want to delete?');"><i class="fa fa-trash fa-2x"></i></a>
         </td>

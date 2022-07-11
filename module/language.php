@@ -18,9 +18,9 @@ class language extends common {
         $this->sm->assign("language", $data);
     }
     function edit() {
-        $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "0";
+        $id = isset($_REQUEST['id_language']) ? $_REQUEST['id_language'] : "0";
         $this->get_permission("language", ($id ? "INSERT" : "UPDATE"));
-        $sql = $this->create_select($this->prefix . "language", "id='{$id}'");
+        $sql = $this->create_select($this->prefix . "language", "id_language='{$id}'");
         $data = $this->m->fetch_assoc($sql);
         $this->sm->assign("data", $data);
     }
@@ -39,14 +39,14 @@ class language extends common {
     function update() {
         $this->get_permission("language", "UPDATE");
         $data =  $_REQUEST['comp'];
-        $sql = $this->create_update($this->prefix . "language",$data, "id='{$_REQUEST['id']}'");
+        $sql = $this->create_update($this->prefix . "language",$data, "id_language='{$_REQUEST['id']}'");
         $res = $this->m->query($sql);
         $_SESSION['msg'] = "Record Successfully Updated";
         $this->redirect("index.php?module=language&func=listing");
     }
     function delete() {
         $this->get_permission("language", "DELETE");
-        // $res = $this->m->query($this->create_delete($this->prefix . "language", "id='{$_REQUEST['id']}'"));
+        // $res = $this->m->query($this->create_delete($this->prefix . "language", "id_language='{$_REQUEST['id_language']}'"));
         // $_SESSION['msg'] = "Record Successfully Deleted";
         $_SESSION['msg'] = "Delete disabled. Action not Successful";
         $this->redirect("index.php?module=language&func=listing");

@@ -13,7 +13,7 @@ class category extends common {
             $_REQUEST['flag'] = 2;
             $wcond = "";
         }
-        $sql = "SELECT c.*, l.english_name AS language_name FROM {$this->prefix}category c, {$this->prefix}language l WHERE c.id_language=l.id $wcond ORDER BY c.name";
+        $sql = "SELECT c.*, l.english_name AS language_name FROM {$this->prefix}category c, {$this->prefix}language l WHERE c.id_language=l.id_language $wcond ORDER BY c.name";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("category", $data);
     }
@@ -25,7 +25,7 @@ class category extends common {
         $this->sm->assign("data", $data);
         
         $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
-        $l = $this->m->getall($this->m->query($sql), 2, "english_name", "id");
+        $l = $this->m->getall($this->m->query($sql), 2, "english_name", "id_language");
         $this->sm->assign("language", $l);
     }
     function insert() {

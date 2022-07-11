@@ -1,6 +1,6 @@
-<form method="post" action="index.php?module=language&func={if $data.id}update{else}insert{/if}">
+<form method="post" action="index.php?module=language&func={if $data.id_language}update{else}insert{/if}">
     <fieldset>
-        <legend>{if $data.id}Edit{else}Add{/if} language</legend>
+        <legend>{if $data.id_language}Edit{else}Add{/if} language</legend>
         <table border="0" cellspacing="2" cellpadding="2">
             <tr>
                 <td><b>English Name:</b></td>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td align="center" colspan="2">
-                    <input type="hidden" id="hide" name="id" value="{$data.id}">
+                    <input type="hidden" id="hide" name="id" value="{$data.id_language}">
                     <input class="btn btn-primary" type="submit" id="submit" value="Save" />
                     <input class="btn btn-danger" type="reset" name="res" value="Reset"/>
                 </td>

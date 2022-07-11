@@ -70,10 +70,11 @@ function update_status(tbl, id, row_status, list_status, ce=1) {
     window.location.href = "index.php?module=" + tbl + "&func=update_flag&table=" + tbl + "&id=" + id + "&row_status=" + row_status + "&list_status=" + list_status + ceval;
 }
 function update_listing(tbl, id) {
+    let url = "index.php?module=" + tbl + "&func=listing";
     if (id > 1)
-        window.location.href = "index.php?module=" + tbl + "&func=listing";
+        window.location.href = url;
     else
-        window.location.href = "index.php?module=" + tbl + "&func=listing&status=" + id;
+        window.location.href = url + "&flag=" + id;
 }
 function callauto(id, url, hid, headers='') {
     $("#" + id).autocomplete({
