@@ -29,7 +29,7 @@ class question extends common {
             $_REQUEST['flag'] = 2;
             $wcond = "";
         }
-        $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id DESC LIMIT 100";
+        $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id_question DESC LIMIT 100";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("question", $data);
     }
