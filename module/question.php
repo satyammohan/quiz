@@ -47,10 +47,10 @@ class question extends common {
     function insert() {
         $this->get_permission("question", "INSERT");
         $data = $_REQUEST['comp'];
-        $data['flag'] = 0;
-        $data['id_user'] = $_SESSION['id_user'];
-        $data['create_date'] = date("Y-m-d h:i:s");
-        $data['ip'] = $_SERVER['REMOTE_ADDR'];
+        // $data['flag'] = 0;
+        // $data['id_user'] = $_SESSION['id_user'];
+        // $data['create_date'] = date("Y-m-d h:i:s");
+        // $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $sql = $this->create_insert($this->prefix . "question", $data);
         $res = $this->m->query($sql);
         $_SESSION['msg'] = "Record Successfully Inserted";
