@@ -5,16 +5,15 @@
             <tr>
                 <td><b>Language:</b></td>
                 <td>
-                    <select class="form-control" required name="comp[id_language]" onchange="getcategory(this.value);">
+                    <select class="form-control" required name="comp[id_language]" onchange="getcategory(this.value, '');">
                         {html_options options=$language selected=$data.id_language}
                     </select>
                 </td>
             </tr>
-            
             <tr>
                 <td><b>Category:</b></td>
                 <td>
-                    <select class="form-control" required id="category" name="comp[id_category]" onchange="getsubcategory(this.value);">
+                    <select class="form-control" required id="category" name="comp[id_category]" onchange="getsubcategory(this.value, '');">
                         {html_options options=$category selected=$data.id_category}
                     </select>
                 </td>
@@ -55,6 +54,9 @@
             <tr>
                 <td align="center" colspan="2">
                     <input type="hidden" id="hide" name="id" value="{$data.id}">
+                    <input type="hidden1" id="id_lang" value="{$data.id_language}">
+                    <input type="hidden1" id="id_cat" value="{$data.id_category}">
+                    <input type="hidden1" id="id_subcat" value="{$data.id_subcategory}">
                     <input class="btn btn-primary" type="submit" id="submit" value="Save" />
                     <input class="btn btn-danger" type="reset" name="res" value="Reset"/>
                 </td>
@@ -64,23 +66,41 @@
 </form>
 
 <script>
-function getcategory(lang) {
+function getcategory(lang, setvalue) {
+    console.log("cat", lang);
     $("#category").empty();
     $("#subcategory").empty();
     $.post( "index.php?module=question&func=category&id_language="+lang, function( data ) {
         jsondata = JSON.parse(data);
         for (i in jsondata) {
-            $('#category').append($('<option>', { value : i }).text(jsondata[i]));
+            if (i==setvalue) {
+                $('#category').append($('<option>', { value : i, "selected":"selected" }).text(jsondata[i]));
+            } else {
+                $('#category').append($('<option>', { value : i }).text(jsondata[i]));
+            }
         }
     });
 }
-function getsubcategory(cat) {
+function getsubcategory(cat, setvalue) {
+    console.log("subcat", cat);
     $("#subcategory").empty();
     $.post( "index.php?module=question&func=subcategory&id_category="+cat, function( data ) {
         jsondata = JSON.parse(data);
         for (i in jsondata) {
-            $('#subcategory').append($('<option>', { value : i }).text(jsondata[i]));
+            if (i==setvalue) {
+                $('#subcategory').append($('<option>', { value : i, "selected":"selected" }).text(jsondata[i]));
+            } else {
+                $('#subcategory').append($('<option>', { value : i }).text(jsondata[i]));
+            }
         }
     });
 }
+$( document ).ready(function() {
+    setcat = $("#id_cat").val()
+    setscat = $("#id_subcat").val()
+
+    lan = $("#id_lang").val();
+    getcategory(lan, setcat);
+    getsubcategory(setcat, setscat);
+});
 </script>
