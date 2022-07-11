@@ -25,8 +25,7 @@ class category extends common {
         $this->sm->assign("data", $data);
         
         $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
-        $res = $this->m->query($sql);
-        $l = $this->m->getall($res, 2, "english_name", "id");
+        $l = $this->m->getall($this->m->query($sql), 2, "english_name", "id");
         $this->sm->assign("language", $l);
     }
     function insert() {

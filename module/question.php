@@ -5,6 +5,22 @@ class question extends common {
         $this->table_prefix();
         parent:: __construct();
     }
+    function category() {
+        $lang = $_REQUEST['id_language'];
+        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
+        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        ob_clean();
+        echo json_encode($category);
+        exit;
+    }
+    function subcategory() {
+        $cat = $_REQUEST['id_category'];
+        $sql = "SELECT * FROM {$this->prefix}subcategory WHERE id_category='$cat' ORDER BY name";
+        $scategory = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
+        ob_clean();
+        echo json_encode($scategory);
+        exit;
+    }
     function listing() {
         $this->get_permission("question", "REPORT");
         if (isset($_REQUEST['flag'])) {
@@ -23,6 +39,10 @@ class question extends common {
         $sql = $this->create_select($this->prefix . "question", "id='{$id}'");
         $data = $this->m->fetch_assoc($sql);
         $this->sm->assign("data", $data);
+
+        $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
+        $l = $this->m->getall($this->m->query($sql), 2, "english_name", "id");
+        $this->sm->assign("language", $l);
     }
     function insert() {
         $this->get_permission("question", "INSERT");
