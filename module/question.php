@@ -60,6 +60,7 @@ class question extends common {
         $this->get_permission("question", "UPDATE");
         $data =  $_REQUEST['comp'];
         $sql = $this->create_update($this->prefix . "question",$data, "id='{$_REQUEST['id']}'");
+        pr($sql);exit;
         $res = $this->m->query($sql);
         $_SESSION['msg'] = "Record Successfully Updated";
         $this->redirect("index.php?module=question&func=listing");
