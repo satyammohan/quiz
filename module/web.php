@@ -37,6 +37,12 @@ class web extends common {
         $lang = $_SESSION['language'];
         $sql = "SELECT * FROM {$this->prefix}question WHERE flag=0 AND id_language='$lang' ORDER BY RAND()  LIMIT 1 ";
         $q = $this->m->sql_getall($sql);
+        $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
+        shuffle($o);
+        $q[0]['option_1'] = $o[0];
+        $q[0]['option_2'] = $o[1];
+        $q[0]['option_3'] = $o[2];
+        $q[0]['option_4'] = $o[3];
         $this->sm->assign("q", $q);
     }
     function setlanguage() {
