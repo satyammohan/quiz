@@ -2,19 +2,27 @@
 <table class="table table-striped table-bordered">
     <tr>
     <form method="post">
-        <td>Question :</td>
+        <td>Language :</td>
         <td>
-            <input class="form-control" name="question" value="{$smarty.request.question}" >
+            <select class="form-control" name="id_language" onchange="getcategory(this.value, '');">
+                {html_options options=$language selected=$smarty.request.id_language}
+            </select>
         </td>
         <td>Category :</td>
         <td>
-            <input class="form-control" name="category" id="category" value="{$smarty.request.category}" >
-            <input type="hidden" name="id_category" id="id_category" value="{$smarty.request.id_category}" >
+            <!-- <input class="form-control" name="category" id="category" value="{$smarty.request.category}" >
+            <input type="hidden" name="id_category" id="id_category" value="{$smarty.request.id_category}" > -->
+            <select class="form-control" required id="category" name="id_category" value="{$smarty.request.id_category}" onchange="getsubcategory(this.value, '');">
+                {html_options options=$category selected=$data.id_category}
+            </select>
         </td>
         <td>Sub-Category :</td>
         <td>
-            <input class="form-control" name="subcategory" id="subcategory" onfocus="setautocomplete();">
-            <input type="hidden" name="id_subcategory" id="id_subcategory">
+            <!-- <input class="form-control" name="subcategory" id="subcategory" onfocus="setautocomplete();">
+            <input type="hidden" name="id_subcategory" id="id_subcategory"> -->
+            <select class="form-control" required id="subcategory" name="id_subcategory" value="{$smarty.request.id_subcategory}"  id="subcategory" onfocus="setautocomplete();">
+                {html_options options=$subcategory selected=$data.id_subcategory}
+            </select>
         </td>
         <td><input type="submit" value="Search"></td>        
     </form>
@@ -45,21 +53,50 @@
     {/foreach}
 </table>
 <script>
-    url = "index.php?module=category&func=search";  
-    callauto("category", url, "id_category");
-    url = "index.php?module=subcategory&func=search";  
-    callauto("subcategory", url, "id_subcategory");
-    
-    function setautocomplete() {
-        id = $("#id_category").val();
-        if (id) {
-            console.log("added");
-            url = "index.php?module=subcategory&func=search&id_category="+id;  
-            callauto("subcategory", url, "id_subcategory");
-        } else {
-            console.log("Destroy");
-            $("#subcategory").autocomplete("destroy");
-            $("#subcategory").removeData("autocomplete");
-        }
+    function getcategory(lang, setvalue) {
+        console.log("cat", lang);
+        $("#category").empty();
+        $("#subcategory").empty();
+        $.post( "index.php?module=question&func=category&id_language="+lang, function( data ) {
+            jsondata = JSON.parse(data);
+            for (i in jsondata) {
+                if (i==setvalue) {
+                    $('#category').append($('<option>', { value : i, "selected":"selected" }).text(jsondata[i]));
+                } else {
+                    $('#category').append($('<option>', { value : i }).text(jsondata[i]));
+                }
+            }
+        });
     }
+    function getsubcategory(cat, setvalue) {
+        console.log("subcat", cat);
+        $("#subcategory").empty();
+        $.post( "index.php?module=question&func=subcategory&id_category="+cat, function( data ) {
+            jsondata = JSON.parse(data);
+            for (i in jsondata) {
+                if (i==setvalue) {
+                    $('#subcategory').append($('<option>', { value : i, "selected":"selected" }).text(jsondata[i]));
+                } else {
+                    $('#subcategory').append($('<option>', { value : i }).text(jsondata[i]));
+                }
+            }
+        });
+    }
+    // url = "index.php?module=category&func=search";  
+    // callauto("category", url, "id_category");
+    // url = "index.php?module=subcategory&func=search";  
+    // callauto("subcategory", url, "id_subcategory");
+    
+    // function setautocomplete() {
+    //     id = $("#id_category").val();
+    //     if (id) {
+    //         console.log("added");
+    //         url = "index.php?module=subcategory&func=search&id_category="+id;  
+    //         callauto("subcategory", url, "id_subcategory");
+    //     } else {
+    //         console.log("Destroy");
+    //         $("#subcategory").autocomplete("destroy");
+    //         $("#subcategory").removeData("autocomplete");
+    //     }
+    // }
 </script>

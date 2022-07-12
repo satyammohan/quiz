@@ -28,6 +28,10 @@ class question extends common {
             $id = $_REQUEST['id_category'];
             $wcond .= " AND id_category='{$id}'";
         }
+        if (isset($_REQUEST['id_language'])) {
+            $id = $_REQUEST['id_language'];
+            $wcond .= " AND id_language='{$id}'";
+        }
         if (isset($_REQUEST['id_subcategory'])) {
             $id = $_REQUEST['id_subcategory'];
             $wcond .= " AND id_subcategory='{$id}'";
@@ -39,6 +43,9 @@ class question extends common {
         $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id_question DESC LIMIT 100";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("question", $data);
+        $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
+        $l = $this->m->getall($this->m->query($sql), 2, "english_name", "id_language");
+        $this->sm->assign("language", $l);
     }
     function edit() {
         $id = isset($_REQUEST['id_question']) ? $_REQUEST['id_question'] : "0";
