@@ -17,6 +17,13 @@ class category extends common {
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("category", $data);
     }
+    function search() {
+        $filter = $_REQUEST['filter'];
+        $sql = "SELECT id_category AS id, concat(name, '(', regional_name, ')') AS name FROM {$this->prefix}category WHERE name LIKE '%$filter%'";
+        $data = $this->m->sql_getall($sql);
+        echo json_encode($data);
+        exit;
+    }
     function edit() {
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "0";
         $this->get_permission("category", ($id ? "INSERT" : "UPDATE"));

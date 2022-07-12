@@ -98,11 +98,7 @@ function callauto(id, url, hid, headers='') {
                 data: { filter: name },
                     success: function(data) {
                     response(jQuery.map(data, function(item) {
-                        if (typeof (hid) == "string") {
-                            return { value: item.name, key: item.id };
-                        } else {
-                            return item;
-                        }
+                        return { value: item.name, key: item.id };
                     }));
                 }
             });

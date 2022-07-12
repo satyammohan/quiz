@@ -23,11 +23,18 @@ class question extends common {
     }
     function listing() {
         $this->get_permission("question", "REPORT");
-        if (isset($_REQUEST['flag'])) {
-            $wcond = ($_REQUEST['flag'] == 2) ?  "" : " WHERE flag = " . $_REQUEST['flag'];
-        } else {
-            $_REQUEST['flag'] = 2;
-            $wcond = "";
+        $wcond = " WHERE 1 ";
+        if (isset($_REQUEST['id_category'])) {
+            $id = $_REQUEST['id_category'];
+            $wcond .= " AND id_category='{$id}'";
+        }
+        if (isset($_REQUEST['id_subcategory'])) {
+            $id = $_REQUEST['id_subcategory'];
+            $wcond .= " AND id_subcategory='{$id}'";
+        }
+        if (isset($_REQUEST['question'])) {
+            $id = $_REQUEST['question'];
+            $wcond .= " AND question LIKE '%{$id}%'";
         }
         $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id_question DESC LIMIT 100";
         $data = $this->m->getall($this->m->query($sql));

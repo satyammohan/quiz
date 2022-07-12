@@ -18,6 +18,14 @@ class subcategory extends common {
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("subcategory", $data);
     }
+    function search() {
+        $filter = $_REQUEST['filter'];
+        $id = $_REQUEST['id_category'];
+        $sql = "SELECT id_subcategory AS id, name FROM {$this->prefix}subcategory WHERE id_category='$id' AND name LIKE '%$filter%'";
+        $data = $this->m->sql_getall($sql);
+        echo json_encode($data);
+        exit;
+    }
     function edit() {
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "0";
         $this->get_permission("subcategory", ($id ? "INSERT" : "UPDATE"));
