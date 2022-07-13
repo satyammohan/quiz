@@ -49,7 +49,11 @@
             </tr>
             <tr>
                 <td><b>Answer:</b></td>
-                <td><input type="text" required name="comp[answer]" class="form-control" value="{$data.answer}" size="4"/></td>
+                <td>
+                    <select class="form-control" required id="answer" name="comp[answer]">
+                        {html_options options=$ini.option selected=$data.answer}
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td align="center" colspan="2">
