@@ -4,7 +4,7 @@
     <form method="post">
         <td>Language :</td>
         <td>
-            <select class="form-control" name="id_language" onchange="getcategory(this.value, '');">
+            <select class="form-control" id="id_language" name="id_language" onchange="getcategory(this.value, '');">
                 {html_options options=$language selected=$smarty.request.id_language}
             </select>
         </td>
@@ -82,21 +82,12 @@
             }
         });
     }
-    // url = "index.php?module=category&func=search";  
-    // callauto("category", url, "id_category");
-    // url = "index.php?module=subcategory&func=search";  
-    // callauto("subcategory", url, "id_subcategory");
     
-    // function setautocomplete() {
-    //     id = $("#id_category").val();
-    //     if (id) {
-    //         console.log("added");
-    //         url = "index.php?module=subcategory&func=search&id_category="+id;  
-    //         callauto("subcategory", url, "id_subcategory");
-    //     } else {
-    //         console.log("Destroy");
-    //         $("#subcategory").autocomplete("destroy");
-    //         $("#subcategory").removeData("autocomplete");
-    //     }
-    // }
+$( document ).ready(function() {
+    lan = $("#id_language").val();
+    cat = "{$smarty.request.id_category}";
+    getcategory(lan, cat);
+    scat = "{$smarty.request.id_subcategory}";
+    getsubcategory(cat, scat);
+});
 </script>
