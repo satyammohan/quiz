@@ -57,9 +57,15 @@ class category extends common {
     }
     function delete() {
         $this->get_permission("category", "DELETE");
-        // $res = $this->m->query($this->create_delete($this->prefix . "category", "id_category='{$_REQUEST['id']}'"));
-        // $_SESSION['msg'] = "Record Successfully Deleted";
-        $_SESSION['msg'] = "Delete disabled. Action not Successful";
+        $id = $_REQUEST['id'];
+        $sql = "SELECT count(*) AS cnt FROM {$this->prefix}subcategory WHERE id_category='$id'";
+        $data = $this->m->fetch_assoc($sql);
+        if ($data['cnt'] == 0) {
+            $this->m->query($this->create_delete($this->prefix . "category", "id_category='$id'"));
+            $_SESSION['msg'] = "Category Successfully Deleted";
+        } else {
+            $_SESSION['msg'] = "Sub-Category Exists. Category Delete not possible.";
+        }
         $this->redirect("index.php?module=category&func=listing");
     }
 }

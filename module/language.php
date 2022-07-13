@@ -46,9 +46,15 @@ class language extends common {
     }
     function delete() {
         $this->get_permission("language", "DELETE");
-        // $res = $this->m->query($this->create_delete($this->prefix . "language", "id_language='{$_REQUEST['id_language']}'"));
-        // $_SESSION['msg'] = "Record Successfully Deleted";
-        $_SESSION['msg'] = "Delete disabled. Action not Successful";
+        $id = $_REQUEST['id_language'];
+        $sql = "SELECT count(*) AS cnt FROM {$this->prefix}category WHERE id_language='$id'";
+        $data = $this->m->fetch_assoc($sql);
+        if ($data['cnt'] == 0) {
+            $this->m->query($this->create_delete($this->prefix . "language", "id_language='$id'"));
+            $_SESSION['msg'] = "Language Successfully Deleted";
+        } else {
+            $_SESSION['msg'] = "Category Exists. Language Delete not possible.";
+        }
         $this->redirect("index.php?module=language&func=listing");
     }
 }

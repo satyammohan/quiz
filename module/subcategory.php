@@ -56,9 +56,15 @@ class subcategory extends common {
     }
     function delete() {
         $this->get_permission("subcategory", "DELETE");
-        // $res = $this->m->query($this->create_delete($this->prefix . "subcategory", "id_subcategory='{$_REQUEST['id']}'"));
-        // $_SESSION['msg'] = "Record Successfully Deleted";
-        $_SESSION['msg'] = "Delete disabled. Action not Successful";
+        $id = $_REQUEST['id'];
+        $sql = "SELECT count(*) AS cnt FROM {$this->prefix}question WHERE id_subcategory='$id'";
+        $data = $this->m->fetch_assoc($sql);
+        if ($data['cnt'] == 0) {
+            $this->m->query($this->create_delete($this->prefix . "subcategory", "id_subcategory='$id'"));
+            $_SESSION['msg'] = "Sub-Category Successfully Deleted";
+        } else {
+            $_SESSION['msg'] = "Question Exists. Sub-Category Delete not possible.";
+        }
         $this->redirect("index.php?module=subcategory&func=listing&id_category={$_REQUEST['id_category']}");
     }
 }

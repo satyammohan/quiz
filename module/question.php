@@ -80,9 +80,9 @@ class question extends common {
     }
     function delete() {
         $this->get_permission("question", "DELETE");
-        // $res = $this->m->query($this->create_delete($this->prefix . "question", "id_question='{$_REQUEST['id_question']}'"));
-        // $_SESSION['msg'] = "Record Successfully Deleted";
-        $_SESSION['msg'] = "Delete disabled. Action not Successful";
+        $id = $_REQUEST['id_question'];
+        $res = $this->m->query($this->create_delete($this->prefix . "question", "id_question='$id'"));
+        $_SESSION['msg'] = "Question Successfully Deleted";
         $this->redirect("index.php?module=question&func=listing");
     }
 }
