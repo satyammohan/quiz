@@ -96,9 +96,9 @@ class question extends common {
         $data = $_REQUEST['comp'];
         if ($_FILES['filename']) {
             $rawfile = getcwd() . "/upload/".date("Y-m-d h:i:s").".xls";
-            $rawfile = getcwd() . "/upload/q.xls";
-            //if (move_uploaded_file($_FILES['filename']['tmp_name'], $rawfile)) {
-            if (1) {
+            //$rawfile = getcwd() . "/upload/sample.xls";
+            if (move_uploaded_file($_FILES['filename']['tmp_name'], $rawfile)) {
+            //if (1) {
                 $cols="id_language, id_category, id_subcategory, question, option_1, option_2, option_3, option_4, answer";
                 $date = date("Y-m-d H:i:s");
                 $vals = $data['id_language'].", ".$data['id_category'].", ".$data['id_subcategory'];
