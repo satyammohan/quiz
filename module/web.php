@@ -25,10 +25,11 @@ class web extends common {
         $cat = $_SESSION['category'];
 
         $sql = "SELECT * FROM {$this->prefix}subcategory WHERE id_category='$cat' ORDER BY name";
-        $scategory = $this->m->getall($this->m->query($sql), 2, "name", "id_category");
+        $scategory = $this->m->getall($this->m->query($sql), 2, "name", "id_subcategory");
         $this->sm->assign("subcategory", $scategory);
     }
     function setcategory() {
+        unset($_SESSION['subcategory']);
         if ($_REQUEST['id']==0) {
             unset($_SESSION['category']);
         } else {
@@ -58,6 +59,7 @@ class web extends common {
         }
         $sql = "SELECT * FROM {$this->prefix}question WHERE flag=0 $wcond ORDER BY RAND()  LIMIT 1 ";
         $q = $this->m->sql_getall($sql);
+	if (count($q)!=0) {
         $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
         shuffle($o);
         $q[0]['option_1'] = $o[0];
@@ -65,6 +67,7 @@ class web extends common {
         $q[0]['option_3'] = $o[2];
         $q[0]['option_4'] = $o[3];
         $this->sm->assign("q", $q);
+	}
     }
     function setlanguage() {
         $_SESSION['language'] = $_REQUEST['id'];
