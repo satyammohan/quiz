@@ -22,11 +22,11 @@ class web extends common {
     }
     function subcategory() {
         $this->get_permission("category", "REPORT");
-        $lang = $_SESSION['language'];
+        $cat = $_SESSION['category'];
 
-        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
-        $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
-        $this->sm->assign("category", $category);
+        $sql = "SELECT * FROM {$this->prefix}subcategory WHERE id_category='$cat' ORDER BY name";
+        $scategory = $this->m->getall($this->m->query($sql), 2, "name", "id_category");
+        $this->sm->assign("subcategory", $scategory);
     }
     function setcategory() {
         if ($_REQUEST['id']==0) {
