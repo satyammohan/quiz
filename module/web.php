@@ -20,10 +20,6 @@ class web extends common {
         $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
         $this->sm->assign("category", $category);
     }
-    function setcategory() {
-        $_SESSION['category'] = $_REQUEST['id'];
-        $this->redirect("index.php");
-    }
     function subcategory() {
         $this->get_permission("category", "REPORT");
         $lang = $_SESSION['language'];
@@ -32,10 +28,35 @@ class web extends common {
         $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
         $this->sm->assign("category", $category);
     }
+    function setcategory() {
+        if ($_REQUEST['id']==0) {
+            unset($_SESSION['category']);
+        } else {
+            $_SESSION['category'] = $_REQUEST['id'];
+        }
+        $this->redirect("index.php");
+    }
+    function setsubcategory() {
+        if ($_REQUEST['id']==0) {
+            unset($_SESSION['subcategory']);
+        } else {
+            $_SESSION['subcategory'] = $_REQUEST['id'];
+        }
+        $this->redirect("index.php");
+    }
     function dashboard() {
         $_SESSION['guest'] = @$_SESSION['guest'] ? $_SESSION['guest'] : rand(1000000, 10000000);
         $lang = $_SESSION['language'];
-        $sql = "SELECT * FROM {$this->prefix}question WHERE flag=0 AND id_language='$lang' ORDER BY RAND()  LIMIT 1 ";
+        $wcond = " AND id_language='$lang' ";
+        if (isset($_SESSION['category'])) {
+            $cat = $_SESSION['category'];
+            $wcond = " AND id_category='$cat' ";
+        }
+        if (isset($_SESSION['subcategory'])) {
+            $scat = $_SESSION['subcategory'];
+            $wcond = " AND id_subcategory='$scat' ";
+        }
+        $sql = "SELECT * FROM {$this->prefix}question WHERE flag=0 $wcond ORDER BY RAND()  LIMIT 1 ";
         $q = $this->m->sql_getall($sql);
         $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
         shuffle($o);
