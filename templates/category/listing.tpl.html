@@ -16,7 +16,8 @@
     </thead>
     {foreach from=$category item=mod}
     <tr>
-        <td><a href="index.php?module=subcategory&func=listing&id_category={$mod.id_category}">{$mod.name}</a></td>
+        <td><a href="index.php?module=subcategory&func=listing&id_category={$mod.id_category}">{$mod.name}</a> 
+            ({if $mod.cnt}{$mod.cnt}{else}0{/if})</td>
         <td>{$mod.language_name}</td>
         <td>{$mod.regional_name}</td>
         <td>{$mod.create_date|date_format:"%d/%m/%Y %H:%M:%S"}</td>

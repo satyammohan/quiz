@@ -13,7 +13,11 @@ class category extends common {
             $_REQUEST['flag'] = 2;
             $wcond = "";
         }
-        $sql = "SELECT c.*, l.english_name AS language_name FROM {$this->prefix}category c, {$this->prefix}language l WHERE c.id_language=l.id_language $wcond ORDER BY c.name";
+        $sql = "SELECT c.*, l.english_name AS language_name, s.cnt 
+                FROM {$this->prefix}language l, {$this->prefix}category c LEFT JOIN (SELECT id_category, COUNT(*) AS cnt FROM {$this->prefix}subcategory GROUP BY id_category) s ON c.id_category=s.id_category 
+                WHERE c.id_language=l.id_language $wcond ORDER BY c.name";
+
+        //SELECT c.*, l.english_name AS language_name, s.cnt FROM quizstation__language l, quizstation__category c LEFT JOIN (SELECT id_category, COUNT(*) AS cnt FROM quizstation__subcategory GROUP BY id_category) s ON c.id_category=s.id_category WHERE c.id_language=l.id_language ORDER BY c.name;
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("category", $data);
     }

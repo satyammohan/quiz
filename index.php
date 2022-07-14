@@ -35,10 +35,11 @@ function getSmarty() {
 function call_class($arr) {
     global $smarty;
     if (!isset($arr['module'])) {
-        $mod = "web";
-        if (isset($arr['page'])) {
-            $func = strtolower($arr['page']);
+        if (isset($_SESSION['id_user'])) {
+            $mod = "language";
+            $func = "listing";
         } else {
+            $mod = "web";
             $func = "dashboard";
         }
     } else {
