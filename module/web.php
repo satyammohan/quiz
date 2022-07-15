@@ -64,6 +64,11 @@ class web extends common {
         if (count($q)!=0) {
             $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
             shuffle($o);
+            $q[0]['answer'] = ($q[0]['option_1']==$o[0]) ? 1 : 0;
+            $q[0]['answer'] = ($q[0]['option_1']==$o[1]) ? 2 : $q[0]['answer'];
+            $q[0]['answer'] = ($q[0]['option_1']==$o[2]) ? 3 : $q[0]['answer'];
+            $q[0]['answer'] = ($q[0]['option_1']==$o[3]) ? 4 : $q[0]['answer'];
+
             $q[0]['option_1'] = $o[0];
             $q[0]['option_2'] = $o[1];
             $q[0]['option_3'] = $o[2];
@@ -73,6 +78,8 @@ class web extends common {
     }
     function setlanguage() {
         $_SESSION['language'] = $_REQUEST['id'];
+        unset($_SESSION['category']);
+        unset($_SESSION['subcategory']);
         $this->redirect("index.php");
     }
     function next() {
@@ -83,7 +90,8 @@ class web extends common {
         $date = date("Y-m-d h:i:s");
         $sql = "INSERT INTO {$this->prefix}response (id_question, answer, ip, id_user, create_date) VALUES ('$id', '$ans', '$ip', '$id_user', '$date')";
         $this->m->query($sql);
-        $this->redirect("index.php");
+        exit;
+        //$this->redirect("index.php");
     }
     function result() {
         $id_user = @$_SESSION['id_user'] ? $_SESSION['id_user'] : $_SESSION['guest'];

@@ -2,25 +2,23 @@
 <table class="table table-striped table-bordered">
     <tr>
     <form method="post">
-        <td>Language :</td>
+        <td>
+            <input type="text" placeholder="Question" autocomplete="none"  class="form-control" name="question" value="{$smarty.request.question}">
+        </td>
         <td>
             <select class="form-control" id="id_language" name="id_language" onchange="getcategory(this.value, '');">
                 {html_options options=$language selected=$smarty.request.id_language}
             </select>
         </td>
-        <td>Category :</td>
+        <td>Cat:</td>
         <td>
-            <!-- <input class="form-control" name="category" id="category" value="{$smarty.request.category}" >
-            <input type="hidden" name="id_category" id="id_category" value="{$smarty.request.id_category}" > -->
-            <select class="form-control" required id="category" name="id_category" value="{$smarty.request.id_category}" onchange="getsubcategory(this.value, '');">
+            <select class="form-control" id="category" name="id_category" value="{$smarty.request.id_category}" onchange="getsubcategory(this.value, '');">
                 {html_options options=$category selected=$data.id_category}
             </select>
         </td>
-        <td>Sub-Category :</td>
+        <td>SubCat:</td>
         <td>
-            <!-- <input class="form-control" name="subcategory" id="subcategory" onfocus="setautocomplete();">
-            <input type="hidden" name="id_subcategory" id="id_subcategory"> -->
-            <select class="form-control" required id="subcategory" name="id_subcategory" value="{$smarty.request.id_subcategory}"  id="subcategory" onfocus="setautocomplete();">
+            <select class="form-control" id="subcategory" name="id_subcategory" value="{$smarty.request.id_subcategory}"  id="subcategory" onfocus="setautocomplete();">
                 {html_options options=$subcategory selected=$data.id_subcategory}
             </select>
         </td>
