@@ -4,7 +4,11 @@ class web extends common {
     function __construct() {
         $this->table_prefix();
         parent:: __construct();
-        $_SESSION['language'] = isset($_SESSION['language']) ? $_SESSION['language'] : 1;
+        if (!isset($_SESSION['language'])) {
+            $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY id_language LIMIT 1";
+            $l = $this->m->sql_getall($sql);
+            $_SESSION['language'] = $l[0]['id_language'];
+        }
     }
     function _default() {
     }
@@ -21,9 +25,7 @@ class web extends common {
         $this->sm->assign("category", $category);
     }
     function subcategory() {
-        $this->get_permission("category", "REPORT");
         $cat = $_SESSION['category'];
-
         $sql = "SELECT * FROM {$this->prefix}subcategory WHERE id_category='$cat' ORDER BY name";
         $scategory = $this->m->getall($this->m->query($sql), 2, "name", "id_subcategory");
         $this->sm->assign("subcategory", $scategory);
@@ -59,15 +61,15 @@ class web extends common {
         }
         $sql = "SELECT * FROM {$this->prefix}question WHERE flag=0 $wcond ORDER BY RAND()  LIMIT 1 ";
         $q = $this->m->sql_getall($sql);
-	if (count($q)!=0) {
-        $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
-        shuffle($o);
-        $q[0]['option_1'] = $o[0];
-        $q[0]['option_2'] = $o[1];
-        $q[0]['option_3'] = $o[2];
-        $q[0]['option_4'] = $o[3];
-        $this->sm->assign("q", $q);
-	}
+        if (count($q)!=0) {
+            $o = array($q[0]['option_1'],$q[0]['option_2'],$q[0]['option_3'],$q[0]['option_4']);
+            shuffle($o);
+            $q[0]['option_1'] = $o[0];
+            $q[0]['option_2'] = $o[1];
+            $q[0]['option_3'] = $o[2];
+            $q[0]['option_4'] = $o[3];
+            $this->sm->assign("q", $q);
+        }
     }
     function setlanguage() {
         $_SESSION['language'] = $_REQUEST['id'];
