@@ -41,7 +41,7 @@ class question extends common {
             $id = $_REQUEST['question'];
             $wcond .= " AND question LIKE '%{$id}%'";
         }
-        $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id_question DESC LIMIT 100";
+        $sql = "SELECT * FROM {$this->prefix}question $wcond ORDER BY id_question DESC LIMIT 500";
         $data = $this->m->getall($this->m->query($sql));
         $this->sm->assign("question", $data);
         $sql = "SELECT * FROM {$this->prefix}language WHERE flag=0 ORDER BY english_name";
