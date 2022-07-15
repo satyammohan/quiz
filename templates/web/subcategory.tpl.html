@@ -1,6 +1,8 @@
-    <a href="index.php?module=web&func=setsubcategory&id=0" class="{if !$smarty.session.category}active{/if} btn btn-info rounded-circle">All</a>
-    {if $subcategory}
-        {foreach from=$subcategory key=k item=i}
-                <a href="index.php?module=web&func=setsubcategory&id={$k}" class="{if $smarty.session.setsubcategory==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
-        {/foreach}
-    {/if}
+{if $subcategory}
+    <a href="index.php?module=web&func=setsubcategory&id=0" class="{if !$smarty.session.subcategory}active{/if} btn btn-info rounded-circle">All</a>
+    {foreach from=$subcategory key=k item=i}
+            <a href="index.php?module=web&func=setsubcategory&id={$k}" class="{if $smarty.session.subcategory==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
+    {/foreach}
+{else}
+    No Subcategory
+{/if}
