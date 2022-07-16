@@ -20,7 +20,7 @@ class web extends common {
     }
     function category() {
         $lang = $_SESSION['language'];
-        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' ORDER BY name";
+        $sql = "SELECT * FROM {$this->prefix}category WHERE id_language='$lang' AND flag=0 ORDER BY name";
         $category = $this->m->getall($this->m->query($sql), 2, "regional_name", "id_category");
         $this->sm->assign("category", $category);
     }
