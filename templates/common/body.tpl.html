@@ -20,7 +20,9 @@
                     {if $page!=""}
                         <div class="col">
                             <div class="err_msg"><b>{$smarty.session.msg}</b></div>
-                            {get_page module="web" func="category"}
+                            {if !$smarty.session.is_admin}
+                                {get_page module="web" func="category"}
+                            {/if}
                             {include file=$page}
                         </div>
                     {else}
