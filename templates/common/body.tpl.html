@@ -9,7 +9,10 @@
         <!-- Main Content -->
         <div id="content">
             {include file="common/topbar.tpl.html"}
-            <!-- Begin Page Content -->
+            {if !$smarty.session.is_admin}
+                {get_page module="web" func="category"}
+            {/if}
+                <!-- Begin Page Content -->
             <div class="container-fluid">
                 <div class="row">
                     {if !$smarty.session.is_admin}

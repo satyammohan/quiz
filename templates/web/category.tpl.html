@@ -1,8 +1,8 @@
-<div class="cnt">
+<div class="text-center btn-info">
     {if $category}
-            <a href="index.php?module=web&func=setcategory&id=0" class="{if !$smarty.session.category}active{/if} btn btn-info rounded-circle">All</a>
+        <a href="index.php?module=web&func=setcategory&id=0" class="{if !$smarty.session.category}active{/if} btn btn-info rounded-circle">All</a>
         {foreach from=$category key=k item=i}
-                <a href="index.php?module=web&func=setcategory&id={$k}" class="{if $smarty.session.category==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
+            <a href="index.php?module=web&func=setcategory&id={$k}" class="{if $smarty.session.category==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
         {/foreach}
     {/if}
 </div>
