@@ -29,7 +29,7 @@
                         This page is coming up.
                     {/if}
                     {if !$smarty.session.is_admin}
-                        <div class="sidebars">
+                        <div class="sidebars donotshow">
                             {include file="common/usersite/right_sidebar.tpl.html"}
                         </div>
                     {/if}
@@ -48,6 +48,11 @@
 <!-- End of Page Wrapper -->
 
 <style>
+@media only screen and (max-width: 1026px) {
+    .donotshow {
+        display: none;
+    }
+}
     .sticky-footer {
       position: fixed;
       bottom: 0px;
