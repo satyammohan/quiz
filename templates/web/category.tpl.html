@@ -1,17 +1,14 @@
 <div class="cnt">
     {if $category}
-        <div class="item">
             <a href="index.php?module=web&func=setcategory&id=0" class="{if !$smarty.session.category}active{/if} btn btn-info rounded-circle">All</a>
-        </div>
         {foreach from=$category key=k item=i}
-            <div class="item">
                 <a href="index.php?module=web&func=setcategory&id={$k}" class="{if $smarty.session.category==$k}active{/if} btn btn-info rounded-circle">{$i}</a>
-            </div>
         {/foreach}
     {/if}
 </div>
 <style>
     .active {
-        color:black !important;
+        color:white !important;
+        font-weight: bolder;
     }
 </style>
