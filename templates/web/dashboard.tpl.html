@@ -1,7 +1,7 @@
 <div id="question" class="container mt-sm-5 my-1">
     {if $q}
     <div class="question ml-sm-5 pl-sm-5 pt-2">
-        <div class="py-2 h5">Q. {$q.0.question}</div>
+        <div class="py-2 h5"><p>Q. {$q.0.question}</p></div>
         <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
             <label class="options" onclick="showright(1);">
                 <div id="o1">{$q.0.option_1}</div>
@@ -61,7 +61,7 @@
     max-width: 700px;
 }
 .container > p{
-    font-size: 32px;
+    font-size: 24px;
 }
 .question{
     width: 75%;
@@ -73,7 +73,7 @@
 #options label{
     display: block;
     margin-bottom: 15px;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
 }
 .options input{
