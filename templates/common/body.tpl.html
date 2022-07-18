@@ -12,6 +12,9 @@
             {if !$smarty.session.is_admin}
                 {get_page module="web" func="category"}
             {/if}
+            <div class="subcategory">
+                {get_page module="web" func="subcategory"}
+            </div>
                 <!-- Begin Page Content -->
             <div class="container-fluid">
                 <div class="row">
@@ -50,6 +53,14 @@
 <style>
 @media only screen and (max-width: 1026px) {
     .sidebars {
+        display: none;
+    }
+    .subcategory {
+        display: show;
+    }
+}
+@media only screen and (min-width: 1026px) {
+    .subcategory {
         display: none;
     }
 }
