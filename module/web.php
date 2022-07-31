@@ -71,8 +71,8 @@ class web extends common {
             shuffle($o);
             $q[0]['answer'] = ($q[0]['option_1']==$o[0]) ? 1 : 0;
             $q[0]['answer'] = ($q[0]['option_1']==$o[1]) ? 2 : $q[0]['answer'];
-            $q[0]['answer'] = ($q[0]['option_1']==$o[2]) ? 3 : $q[0]['answer'];
-            $q[0]['answer'] = ($q[0]['option_1']==$o[3]) ? 4 : $q[0]['answer'];
+            $q[0]['answer'] = ($q[0]['option_1']==@$o[2]) ? 3 : $q[0]['answer'];
+            $q[0]['answer'] = ($q[0]['option_1']==@$o[3]) ? 4 : $q[0]['answer'];
 
             $q[0]['option_1'] = $o[0];
             $q[0]['option_2'] = $o[1];
