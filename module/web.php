@@ -76,7 +76,7 @@ class web extends common {
 
             $q[0]['option_1'] = $o[0];
             $q[0]['option_2'] = $o[1];
-            $q[0]['option_3'] = @o[2];
+            $q[0]['option_3'] = @$o[2];
             $q[0]['option_4'] = @$o[3];
             $this->sm->assign("q", $q);
         }
