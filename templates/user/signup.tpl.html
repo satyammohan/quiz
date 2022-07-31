@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-lg-3">&nbsp;</div>
+    <div class="col-lg-6">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">Quizstation New User Signup</h1>
+        </div>
+        <form class="user" method="post" action="index.php?module=user&func=saveuser">
+            <div class="form-group">
+                <input type="text" required name="user[name]" class="form-control form-control-user" id="name" placeholder="Enter User Name...">
+            </div>
+            <div class="form-group">
+                <input type="text" required name="user[email]" class="form-control form-control-user" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <input type="text" required name="user[uname]" class="form-control form-control-user" id="uname" onblur="checkuser()" placeholder="Enter User Name...">
+                <div id="unamerror" class="text-danger"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" required name="user[language]" class="form-control form-control-user" placeholder="Enter Language">
+            </div>
+            <div class="form-group">
+                <input type="date" required name="user[dob]" class="form-control form-control-user" placeholder="Enter Date of Birth">
+            </div>
+            <div class="form-group">
+                <input autocomplete="off" type="text" required name="user[pass]" class="form-control form-control-user" placeholder="Password">
+            </div>
+            <button class="btn btn-primary btn-user btn-block" id="save">
+                Save
+            </button>
+        </form>
+        <hr>
+        <div class="text-center">
+            <a class="small">&nbsp;</a>
+        </div>
+    </div>
+</div>
+<script>
+    $("#name").focus();
+    function checkuser() {
+        $("#save").prop('disabled', true);
+        uname = $("#uname").val();
+        $("#unamerror").html("");
+        $.post("index.php?module=user&func=checkuser&ce=1&uname="+uname, function(data){
+            if (data=="error") {
+                $("#unamerror").html("User Name already taken. Please try another.");
+                $("#uname").focus();
+            } else {
+                $("#save").prop('disabled', false);
+            }
+        });
+    }
+</script>

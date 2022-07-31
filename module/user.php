@@ -1,19 +1,43 @@
 <?php
-
 class user extends common {
-
     function __construct() {
         parent:: __construct();
         if (isset($_REQUEST['user'])) {
             $this->data = $_REQUEST['user'];
         }
     }
-
     function _default() {
         $this->sm->assign("page", "user/home.tpl.html");
     }
     function login() {
-
+    }
+    function signup() {
+    }    
+    function checkuser() {
+        $sql = "select * from user where user='" . $_REQUEST['uname'] . "';";
+        ob_clean();
+        $res = $this->m->fetch_assoc($sql);
+        if ($res) {
+            echo "error";
+        } else {
+            echo "success";
+        }
+        exit;
+    }
+    function saveuser() {
+        $u = $_REQUEST['user'];
+        $name = $u['name'];
+        $email = $u['email'];
+        $user = $u['uname'];
+        $dob = $u['dob'];
+        $language = $u['language'];
+        $pass = md5($u['pass']);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $sql = "INSERT INTO user (name, email, user, language, dob, pass, random, status, login_status, is_admin, ip) 
+                VALUES ('$name', '$email', '$user', '$language', '$dob', '$pass', '', '', 1, 0, '$ip')";
+        $this->m->query($sql);
+        $_SESSION['msg'] = "User Successfully Created. Please Logged in.";
+        $this->redirect("index.php");
     }
     function setsess() {
         $_SESSION['id_user'] = 1;
@@ -31,7 +55,7 @@ class user extends common {
         }
     }
     function setlogin() {
-        $sql = "SELECT * FROM user WHERE user='".$_REQUEST['user']['uname']."' AND pass=md5('".$_REQUEST['user']['pass']."')";
+        $sql = "SELECT id_user, user, pass, name, email, dob FROM user WHERE user='".$_REQUEST['user']['uname']."' AND pass=md5('".$_REQUEST['user']['pass']."')";
         $user = $this->m->fetch_assoc($sql);
         if ($user) {
             $this->set_session($user);
@@ -41,7 +65,7 @@ class user extends common {
             $_SESSION['msg'] = "Invalid Username or Password.";
             $this->redirect("index.php?module=user&func=login");
         }
-    }    
+    }   
     function changepass() {
         $this->sm->assign("page", "user/changepass.tpl.html");
     }
@@ -149,15 +173,6 @@ class user extends common {
         }
     }
 
-    function checkuser() {
-        $sql = "select * from user where user='" . $this->data['uname'] . "';";
-        $res = mysql_query($sql);
-        if ($data = mysql_fetch_array($res)) {
-            echo "error";
-        } else {
-            echo "success";
-        }
-    }
 
     function insert() {
         $data = $_REQUEST['user'];
@@ -218,7 +233,5 @@ class user extends common {
         $sql = "SELECT * FROM user $wcond ORDER BY is_admin";
         $this->sm->assign("user", $this->m->getall($this->m->query($sql)));
     }
-
 }
-
 ?>

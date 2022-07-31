@@ -1,6 +1,6 @@
 {if !$smarty.session.is_admin}
   <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-info">
-    <a class="navbar-brand" href=""><img src='img/logo.jpg'></a>
+    <a class="navbar-brand" href="index.php"><img src='img/logo.jpg'></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,7 +11,7 @@
           <a class="nav-link" href="index.php?page=marketplace"><i class="fa fa-home"></i>Marketplace</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php?page=leaderboard"><i class="fa fa-users"></i>Leaderboard</a>
+          <a class="nav-link" href="index.php?module=web&func=leader"><i class="fa fa-users"></i>Leaderboard</a>
         </li>
         <li class="form-inline my-2 my-lg-0">
             {get_page module="web" func="language"}
@@ -57,12 +57,18 @@
             Test
           </a>
         </li> -->
+        {if !$smarty.session.id_user}
         <li class="nav-item">
-            <a class="nav-link" href="index.php?page=signup"><i class="fa fa-users"></i>Signup</a>
+            <a class="nav-link" href="index.php?module=user&func=signup"><i class="fa fa-users"></i>Signup</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="index.php?module=user&func=login"><i class="fa fa-sign-in"></i>Signin</a>
         </li>
+        {else}
+        <li class="nav-item">
+          <a class="nav-link" href="index.php?module=user&func=logout"><i class="fa fa-sign-out"></i>Logout</a>
+        </li>
+        {/if}
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

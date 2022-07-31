@@ -13,16 +13,20 @@
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
+            {if $q.0.option_3}
             <label class="options" onclick="showright(3);">
                 <div id="o3">{$q.0.option_3}</div>
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
+            {/if}
+            {if $q.0.option_4}
             <label class="options" onclick="showright(4);">
                 <div id="o4">{$q.0.option_4}</div>
                 <input type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
+            {/if}
         </div>
     </div>
     <div class="d-flex align-items-center pt-3">
@@ -36,19 +40,23 @@
 <script>
     var ans='{$q.0.answer}';
     var q='{$q.0.id_question}';
+    var ent = 0;
     function showright(aid) {
         if (ans!=aid) {
             $("#o"+aid).addClass("btn btn-danger");
         }
         $("#o"+ans).addClass("btn btn-success");
-        setTimeout(function() {
-            $.post("index.php?module=web&func=next&ce=1&id="+q+"&ans="+aid+"&result="+(ans==aid), function(data){
-                $("#question").hide('slow');
-                $.post("index.php?ce=1", function(data){
-                    $("#question").html(data).show('slow');
+        if (ent==0) {
+            setTimeout(function() {
+                $.post("index.php?module=web&func=next&ce=1&id="+q+"&ans="+aid+"&result="+(ans==aid), function(data){
+                    $("#question").hide('slow');
+                    $.post("index.php?ce=1", function(data){
+                        $("#question").html(data).show('slow');
+                    });
                 });
-            });
-        }, 2000);
+            }, 2000);
+        }
+        ent = 1;
     }
 </script>
 <style>

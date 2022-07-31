@@ -35,7 +35,7 @@ function getSmarty() {
 function call_class($arr) {
     global $smarty;
     if (!isset($arr['module'])) {
-        if (isset($_SESSION['id_user'])) {
+        if (@$_SESSION['is_admin']==1) {
             $mod = "language";
             $func = "listing";
         } else {
